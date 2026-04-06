@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  # The Backend FastAPI Service
+  backend:
+    build:
+      context: .  # Use the current directory as the build context
+      dockerfile: Dockerfile.backend # Specify which Dockerfile to use
+    env_file:
+      - ./.env
+
+  # The Frontend Flask Service
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend # Specify the frontend's Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - SERVER_URL=http://${BACKEND_SERVICE_NAME}:${BACKEND_SERVICE_PORT}
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - backend

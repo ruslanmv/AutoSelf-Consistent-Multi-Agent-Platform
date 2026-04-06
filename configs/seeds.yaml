@@ -1,0 +1,11 @@
+# seeds.yaml
+# Exact seeds per experiment for reproducibility.
+hazards_failures:
+  seeds: [101, 102, 103, 104, 105, 106, 107, 108, 109, 110]
+
+contention:
+  "0.1": [2001, 2002]
+  "0.3": [3001, 3002]
+  "0.5": [5001, 5002]
+  "0.7": [7001, 7002]
+  "0.9": [9001, 9002]

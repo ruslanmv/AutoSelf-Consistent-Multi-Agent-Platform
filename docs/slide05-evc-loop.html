@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>E-V-C Loop</title>
+  <style>
+    :root {
+      --color-surface: #0d1117;
+      --color-surface-foreground: #e6edf3;
+      --color-primary: #58a6ff;
+      --color-secondary: #f78166;
+      --color-muted: #161b22;
+      --color-muted-foreground: #8b949e;
+      --color-accent: #d29922;
+      --color-border: #30363d;
+    }
+  </style>
+  <script src="scale.js" defer></script>
+  <script src="nav.js" defer></script>
+</head>
+<body class="col" style="width: 960px; height: 540px; background: #0d1117; position: relative;">
+  
+  <!-- Left accent bar -->
+  <div style="position: absolute; left: 0; top: 0; width: 6px; height: 100%; background: #238636;"></div>
+  
+  <!-- Title zone -->
+  <div style="width: 920px; margin: 0 20px 0 26px; padding-top: 24px;" class="fit">
+    <h1 style="margin: 0; font-size: 32px; color: #e6edf3; font-weight: 700;">The E–V–C Loop</h1>
+    <p style="margin: 6px 0 0 0; font-size: 14px; color: #8b949e;">Execution → Verification → Correction — the core algorithm</p>
+  </div>
+  
+  <!-- Content zone -->
+  <div class="row fill-height" style="padding: 16px 20px 16px 26px; gap: 24px;">
+    
+    <!-- Left: Algorithm pseudocode -->
+    <div class="col" style="width: 48%;">
+      <div style="background: #161b22; border-radius: 10px; padding: 16px; border: 1px solid #30363d; font-family: 'Courier New', monospace; height: 100%;">
+        <p style="margin: 0 0 12px 0; font-size: 12px; color: #58a6ff; font-weight: 700;">Algorithm 1: AutoSelf E–V–C Loop</p>
+        
+        <p style="margin: 0 0 4px 0; font-size: 11px; color: #8b949e;"><strong style="color: #f78166;">Input:</strong> Plan P with dependencies; state s</p>
+        <p style="margin: 0 0 8px 0; font-size: 11px; color: #8b949e;">t ← 0</p>
+        
+        <p style="margin: 0 0 4px 0; font-size: 11px; color: #a371f7;"><strong>while</strong> P ≠ ∅ <strong>do</strong></p>
+        
+        <div style="margin-left: 16px;">
+          <p style="margin: 0 0 4px 0; font-size: 11px; color: #e6edf3;">t ← t+1</p>
+          
+          <!-- Execute -->
+          <p style="margin: 0 0 4px 0; font-size: 11px;"><span style="background: #58a6ff; color: #0d1117; padding: 1px 6px; border-radius: 3px; font-weight: 600;">EXECUTE</span> <span style="color: #e6edf3;">E<sub>t</sub>; observe Δ<sub>t</sub>; update s<sub>t</sub></span></p>
+          
+          <!-- Propose -->
+          <p style="margin: 0 0 4px 0; font-size: 11px; color: #e6edf3;">Propose P<sub>t+1</sub> <span style="color: #8b949e;">(enabled tasks)</span></p>
+          
+          <!-- Verify -->
+          <p style="margin: 0 0 4px 0; font-size: 11px;"><span style="background: #238636; color: #fff; padding: 1px 6px; border-radius: 3px; font-weight: 600;">VERIFY</span> <span style="color: #e6edf3;">issues ← Analyze(P<sub>t+1</sub>, s<sub>t</sub>)</span></p>
+          
+          <p style="margin: 0 0 4px 0; font-size: 11px; color: #a371f7;"><strong>while</strong> issues ≠ ∅ <strong>do</strong></p>
+          <div style="margin-left: 16px;">
+            <!-- Correct -->
+            <p style="margin: 0 0 4px 0; font-size: 11px;"><span style="background: #a371f7; color: #fff; padding: 1px 6px; border-radius: 3px; font-weight: 600;">CORRECT</span> <span style="color: #e6edf3;">P<sub>t+1</sub> ← Correct(P<sub>t+1</sub>, issues)</span></p>
+            <p style="margin: 0 0 4px 0; font-size: 11px; color: #e6edf3;">issues ← Analyze(P<sub>t+1</sub>, s<sub>t</sub>)</p>
+          </div>
+          <p style="margin: 0 0 8px 0; font-size: 11px; color: #a371f7;"><strong>end while</strong></p>
+          
+          <p style="margin: 0 0 4px 0; font-size: 11px; color: #e6edf3;">E<sub>t+1</sub> ← P<sub>t+1</sub>; <span style="color: #d29922;">dispatch</span>; remove completed</p>
+        </div>
+        
+        <p style="margin: 0; font-size: 11px; color: #a371f7;"><strong>end while</strong></p>
+      </div>
+    </div>
+    
+    <!-- Right: Visual cycle -->
+    <div class="col" style="flex: 1; gap: 16px;">
+      
+      <!-- Cycle diagram -->
+      <div style="background: #161b22; border-radius: 12px; padding: 20px; text-align: center;">
+        <div class="row" style="gap: 12px; justify-content: center; align-items: center;">
+          
+          <!-- Execute -->
+          <div style="text-align: center;">
+            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #58a6ff 0%, #388bfd 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+              <p style="margin: 0; font-size: 11px; color: #fff; font-weight: 700;">EXECUTE</p>
+            </div>
+            <p style="margin: 6px 0 0 0; font-size: 10px; color: #8b949e;">Run tasks</p>
+            <p style="margin: 2px 0 0 0; font-size: 9px; color: #58a6ff;">Update state</p>
+          </div>
+          
+          <p style="margin: 0; font-size: 28px; color: #58a6ff;">→</p>
+          
+          <!-- Verify -->
+          <div style="text-align: center;">
+            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #238636 0%, #2ea043 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+              <p style="margin: 0; font-size: 11px; color: #fff; font-weight: 700;">VERIFY</p>
+            </div>
+            <p style="margin: 6px 0 0 0; font-size: 10px; color: #8b949e;">Hybrid check</p>
+            <p style="margin: 2px 0 0 0; font-size: 9px; color: #238636;">Find issues</p>
+          </div>
+          
+          <p style="margin: 0; font-size: 28px; color: #238636;">→</p>
+          
+          <!-- Correct -->
+          <div style="text-align: center;">
+            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #a371f7 0%, #8957e5 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+              <p style="margin: 0; font-size: 11px; color: #fff; font-weight: 700;">CORRECT</p>
+            </div>
+            <p style="margin: 6px 0 0 0; font-size: 10px; color: #8b949e;">Minimal edit</p>
+            <p style="margin: 2px 0 0 0; font-size: 9px; color: #a371f7;">Re-verify</p>
+          </div>
+          
+        </div>
+        
+        <!-- Loop arrow -->
+        <div style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 12px; color: #d29922;">↺ Repeat at construction cadence</p>
+        </div>
+      </div>
+      
+      <!-- Key properties -->
+      <div class="row" style="gap: 10px;">
+        <div style="flex: 1; background: rgba(88, 166, 255, 0.1); border: 1px solid #58a6ff; border-radius: 8px; padding: 12px;">
+          <p style="margin: 0 0 4px 0; font-size: 11px; color: #58a6ff; font-weight: 700;">Just-in-Time</p>
+          <p style="margin: 0; font-size: 10px; color: #e6edf3; line-height: 1.4;">Verify immediately before dispatch, not at planning time</p>
+        </div>
+        <div style="flex: 1; background: rgba(163, 113, 247, 0.1); border: 1px solid #a371f7; border-radius: 8px; padding: 12px;">
+          <p style="margin: 0 0 4px 0; font-size: 11px; color: #a371f7; font-weight: 700;">Minimal Edits</p>
+          <p style="margin: 0; font-size: 10px; color: #e6edf3; line-height: 1.4;">Smallest change to restore consistency</p>
+        </div>
+      </div>
+      
+      <!-- Correction types -->
+      <div style="background: #161b22; border-radius: 8px; padding: 12px;">
+        <p style="margin: 0 0 8px 0; font-size: 11px; color: #d29922; font-weight: 700;">CORRECTION STRATEGIES</p>
+        <div class="row" style="gap: 8px;">
+          <div style="flex: 1; text-align: center; padding: 6px; background: #0d1117; border-radius: 6px;">
+            <p style="margin: 0; font-size: 10px; color: #e6edf3;">⏱️ Stagger</p>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 6px; background: #0d1117; border-radius: 6px;">
+            <p style="margin: 0; font-size: 10px; color: #e6edf3;">🔄 Reorder</p>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 6px; background: #0d1117; border-radius: 6px;">
+            <p style="margin: 0; font-size: 10px; color: #e6edf3;">🔀 Reassign</p>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 6px; background: #0d1117; border-radius: 6px;">
+            <p style="margin: 0; font-size: 10px; color: #e6edf3;">🔍 Inspect</p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <!-- Bottom bar -->
+  <div style="height: 3px; width: 100%; flex-shrink: 0; background: #238636;"></div>
+  
+</body>
+</html>

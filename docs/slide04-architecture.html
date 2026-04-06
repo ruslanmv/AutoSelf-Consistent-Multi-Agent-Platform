@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AutoSelf Architecture</title>
+  <style>
+    :root {
+      --color-surface: #0d1117;
+      --color-surface-foreground: #e6edf3;
+      --color-primary: #58a6ff;
+      --color-secondary: #f78166;
+      --color-muted: #161b22;
+      --color-muted-foreground: #8b949e;
+      --color-accent: #d29922;
+      --color-border: #30363d;
+    }
+  </style>
+  <script src="scale.js" defer></script>
+  <script src="nav.js" defer></script>
+</head>
+<body class="col" style="width: 960px; height: 540px; background: #0d1117; position: relative;">
+  
+  <!-- Left accent bar -->
+  <div style="position: absolute; left: 0; top: 0; width: 6px; height: 100%; background: #d29922;"></div>
+  
+  <!-- Title zone -->
+  <div style="width: 920px; margin: 0 20px 0 26px; padding-top: 24px;" class="fit">
+    <h1 style="margin: 0; font-size: 32px; color: #e6edf3; font-weight: 700;">AutoSelf Architecture</h1>
+    <p style="margin: 6px 0 0 0; font-size: 14px; color: #8b949e;">Centralized orchestration with hybrid verification stack</p>
+  </div>
+  
+  <!-- Content zone -->
+  <div class="col fill-height" style="padding: 16px 20px 16px 26px; gap: 12px;">
+    
+    <!-- Architecture diagram -->
+    <div class="row" style="gap: 16px; flex: 1;">
+      
+      <!-- Left: Agents -->
+      <div class="col" style="width: 22%; gap: 8px;">
+        <p style="margin: 0 0 4px 0; font-size: 11px; color: #8b949e; text-align: center; letter-spacing: 1px;">AGENTS</p>
+        <div style="background: #161b22; border-radius: 8px; padding: 10px; text-align: center; border: 1px solid #58a6ff;">
+          <p style="margin: 0; font-size: 16px;">🖨️</p>
+          <p style="margin: 4px 0 0 0; font-size: 10px; color: #58a6ff; font-weight: 600;">3D Printer</p>
+        </div>
+        <div style="background: #161b22; border-radius: 8px; padding: 10px; text-align: center; border: 1px solid #f78166;">
+          <p style="margin: 0; font-size: 16px;">🦾</p>
+          <p style="margin: 4px 0 0 0; font-size: 10px; color: #f78166; font-weight: 600;">Assembly Arm</p>
+        </div>
+        <div style="background: #161b22; border-radius: 8px; padding: 10px; text-align: center; border: 1px solid #d29922;">
+          <p style="margin: 0; font-size: 16px;">🚗</p>
+          <p style="margin: 4px 0 0 0; font-size: 10px; color: #d29922; font-weight: 600;">Transport Rover</p>
+        </div>
+        <div style="background: #161b22; border-radius: 8px; padding: 10px; text-align: center; border: 1px solid #a371f7;">
+          <p style="margin: 0; font-size: 16px;">🔍</p>
+          <p style="margin: 4px 0 0 0; font-size: 10px; color: #a371f7; font-weight: 600;">Inspection</p>
+        </div>
+        <p style="margin: 4px 0 0 0; font-size: 9px; color: #8b949e; text-align: center;">Capability APIs</p>
+      </div>
+      
+      <!-- Arrow -->
+      <div style="display: flex; align-items: center;">
+        <p style="margin: 0; font-size: 20px; color: #58a6ff;">⟷</p>
+      </div>
+      
+      <!-- Center: Orchestrator -->
+      <div class="col" style="flex: 1; gap: 8px;">
+        <div style="background: linear-gradient(135deg, #161b22 0%, #1f2937 100%); border: 2px solid #58a6ff; border-radius: 12px; padding: 14px;">
+          <p style="margin: 0 0 10px 0; font-size: 14px; color: #58a6ff; font-weight: 700; text-align: center;">🎯 AUTOSELF ORCHESTRATOR</p>
+          
+          <!-- E-V-C Loop mini -->
+          <div class="row" style="gap: 8px; justify-content: center; margin-bottom: 10px;">
+            <div style="background: #58a6ff; border-radius: 6px; padding: 6px 10px;">
+              <p style="margin: 0; font-size: 10px; color: #0d1117; font-weight: 700;">Execute</p>
+            </div>
+            <p style="margin: 0; color: #58a6ff;">→</p>
+            <div style="background: #238636; border-radius: 6px; padding: 6px 10px;">
+              <p style="margin: 0; font-size: 10px; color: #fff; font-weight: 700;">Verify</p>
+            </div>
+            <p style="margin: 0; color: #58a6ff;">→</p>
+            <div style="background: #a371f7; border-radius: 6px; padding: 6px 10px;">
+              <p style="margin: 0; font-size: 10px; color: #fff; font-weight: 700;">Correct</p>
+            </div>
+            <p style="margin: 0; color: #58a6ff;">↺</p>
+          </div>
+          
+          <!-- Components -->
+          <div class="row" style="gap: 6px;">
+            <div style="flex: 1; background: #0d1117; border-radius: 6px; padding: 8px; text-align: center;">
+              <p style="margin: 0; font-size: 9px; color: #d29922; font-weight: 600;">World Model</p>
+              <p style="margin: 2px 0 0 0; font-size: 8px; color: #8b949e;">Fused state s<sub>t</sub></p>
+            </div>
+            <div style="flex: 1; background: #0d1117; border-radius: 6px; padding: 8px; text-align: center;">
+              <p style="margin: 0; font-size: 9px; color: #d29922; font-weight: 600;">Task Frontier</p>
+              <p style="margin: 2px 0 0 0; font-size: 8px; color: #8b949e;">Enabled tasks</p>
+            </div>
+            <div style="flex: 1; background: #0d1117; border-radius: 6px; padding: 8px; text-align: center;">
+              <p style="margin: 0; font-size: 9px; color: #d29922; font-weight: 600;">Batch P<sub>t+1</sub></p>
+              <p style="margin: 2px 0 0 0; font-size: 8px; color: #8b949e;">Proposals</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Arrow down -->
+        <div style="text-align: center;">
+          <p style="margin: 0; font-size: 16px; color: #238636;">↓</p>
+        </div>
+        
+        <!-- Verification Module -->
+        <div style="background: rgba(35, 134, 54, 0.15); border: 1px solid #238636; border-radius: 10px; padding: 12px;">
+          <p style="margin: 0 0 8px 0; font-size: 12px; color: #238636; font-weight: 700; text-align: center;">HYBRID VERIFICATION</p>
+          <div class="row" style="gap: 6px;">
+            <div style="flex: 1; background: #0d1117; border-radius: 6px; padding: 8px; text-align: center; border-top: 2px solid #58a6ff;">
+              <p style="margin: 0; font-size: 9px; color: #58a6ff; font-weight: 600;">Rules</p>
+              <p style="margin: 2px 0 0 0; font-size: 8px; color: #8b949e;">μs checks</p>
+            </div>
+            <div style="flex: 1; background: #0d1117; border-radius: 6px; padding: 8px; text-align: center; border-top: 2px solid #f78166;">
+              <p style="margin: 0; font-size: 9px; color: #f78166; font-weight: 600;">Digital Twin</p>
+              <p style="margin: 2px 0 0 0; font-size: 8px; color: #8b949e;">Short rollouts</p>
+            </div>
+            <div style="flex: 1; background: #0d1117; border-radius: 6px; padding: 8px; text-align: center; border-top: 2px solid #a371f7;">
+              <p style="margin: 0; font-size: 9px; color: #a371f7; font-weight: 600;">LLM-Gated</p>
+              <p style="margin: 2px 0 0 0; font-size: 8px; color: #8b949e;">Reasoning</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Arrow -->
+      <div style="display: flex; align-items: center;">
+        <p style="margin: 0; font-size: 20px; color: #58a6ff;">⟷</p>
+      </div>
+      
+      <!-- Right: Data Services -->
+      <div class="col" style="width: 22%; gap: 8px;">
+        <p style="margin: 0 0 4px 0; font-size: 11px; color: #8b949e; text-align: center; letter-spacing: 1px;">DATA SERVICES</p>
+        <div style="background: #161b22; border-radius: 8px; padding: 10px; text-align: center;">
+          <p style="margin: 0; font-size: 14px;">📊</p>
+          <p style="margin: 4px 0 0 0; font-size: 10px; color: #e6edf3; font-weight: 600;">Knowledge Graph</p>
+        </div>
+        <div style="background: #161b22; border-radius: 8px; padding: 10px; text-align: center;">
+          <p style="margin: 0; font-size: 14px;">🗄️</p>
+          <p style="margin: 4px 0 0 0; font-size: 10px; color: #e6edf3; font-weight: 600;">Vector DB</p>
+        </div>
+        <div style="background: #161b22; border-radius: 8px; padding: 10px; text-align: center;">
+          <p style="margin: 0; font-size: 14px;">📝</p>
+          <p style="margin: 4px 0 0 0; font-size: 10px; color: #e6edf3; font-weight: 600;">System Logs</p>
+        </div>
+        <div style="background: rgba(163, 113, 247, 0.15); border: 1px solid #a371f7; border-radius: 8px; padding: 10px; text-align: center;">
+          <p style="margin: 0; font-size: 14px;">🧠</p>
+          <p style="margin: 4px 0 0 0; font-size: 10px; color: #a371f7; font-weight: 600;">Neurosymbolic</p>
+          <p style="margin: 2px 0 0 0; font-size: 8px; color: #8b949e;">Ontology check</p>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- Key features bar -->
+    <div class="row" style="gap: 12px;">
+      <div style="flex: 1; background: #161b22; border-radius: 6px; padding: 8px 12px; text-align: center;">
+        <p style="margin: 0; font-size: 10px; color: #58a6ff; font-weight: 600;">🐳 Containerized</p>
+      </div>
+      <div style="flex: 1; background: #161b22; border-radius: 6px; padding: 8px 12px; text-align: center;">
+        <p style="margin: 0; font-size: 10px; color: #238636; font-weight: 600;">🔒 Secure</p>
+      </div>
+      <div style="flex: 1; background: #161b22; border-radius: 6px; padding: 8px 12px; text-align: center;">
+        <p style="margin: 0; font-size: 10px; color: #f78166; font-weight: 600;">📡 Real-time</p>
+      </div>
+      <div style="flex: 1; background: #161b22; border-radius: 6px; padding: 8px 12px; text-align: center;">
+        <p style="margin: 0; font-size: 10px; color: #d29922; font-weight: 600;">⚡ Low latency</p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Bottom bar -->
+  <div style="height: 3px; width: 100%; flex-shrink: 0; background: #d29922;"></div>
+  
+</body>
+</html>

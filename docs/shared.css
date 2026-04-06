@@ -1,0 +1,77 @@
+/* AutoSelf Presentation Theme - Space Industrial */
+:root {
+  /* Dark space background with Mars-inspired accents */
+  --color-surface: #0d1117;
+  --color-surface-foreground: #e6edf3;
+  
+  /* Primary: Electric blue for technology/AI */
+  --color-primary: #58a6ff;
+  --color-primary-light: #79b8ff;
+  --color-primary-dark: #388bfd;
+  --color-primary-foreground: #0d1117;
+  
+  /* Secondary: Mars rust orange for accents */
+  --color-secondary: #f78166;
+  --color-secondary-foreground: #0d1117;
+  
+  /* Muted: Dark slate for cards */
+  --color-muted: #161b22;
+  --color-muted-foreground: #8b949e;
+  
+  /* Accent: Warm gold for highlights */
+  --color-accent: #d29922;
+  --color-accent-foreground: #0d1117;
+  
+  --color-border: #30363d;
+  
+  /* Typography */
+  --font-family-display: Arial, sans-serif;
+  --font-weight-display: 700;
+  --font-family-content: Arial, sans-serif;
+  --font-weight-content: 400;
+  --font-size-content: 14px;
+  --line-height-content: 1.5;
+}
+
+/* --- Fullscreen fit / responsive scaling for slide pages --- */
+html.scaled-slide, html.scaled-slide body {
+  margin: 0;
+  padding: 0;
+}
+
+html.scaled-slide {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* Center the 960x540 slide on the screen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface, #0d1117);
+}
+
+html.scaled-slide body {
+  /* body already has inline width/height (960x540) and background */
+  flex: 0 0 auto;
+  position: relative;
+  transform-origin: center center;
+  transform: scale(var(--slide-scale, 1));
+  /* avoid unexpected scrollbars */
+  overflow: hidden;
+}
+
+/* --- Auto-hide slide UI controls (menu/buttons), toggle with "H" --- */
+.__autoself_controls {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease;
+}
+
+html.show-controls .__autoself_controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+html.hide-controls .__autoself_controls {
+  display: none !important;
+}

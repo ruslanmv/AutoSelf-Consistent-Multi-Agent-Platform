@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ablation Study</title>
+  <style>
+    :root {
+      --color-surface: #0d1117;
+      --color-surface-foreground: #e6edf3;
+      --color-primary: #58a6ff;
+      --color-secondary: #f78166;
+      --color-muted: #161b22;
+      --color-muted-foreground: #8b949e;
+      --color-accent: #d29922;
+      --color-border: #30363d;
+    }
+  </style>
+  <script src="scale.js" defer></script>
+  <script src="nav.js" defer></script>
+</head>
+<body class="col" style="width: 960px; height: 540px; background: #0d1117; position: relative;">
+  
+  <!-- Left accent bar -->
+  <div style="position: absolute; left: 0; top: 0; width: 6px; height: 100%; background: #a371f7;"></div>
+  
+  <!-- Title zone -->
+  <div style="width: 920px; margin: 0 20px 0 26px; padding-top: 24px;" class="fit">
+    <h1 style="margin: 0; font-size: 32px; color: #e6edf3; font-weight: 700;">Why It Works & At What Cost</h1>
+    <p style="margin: 6px 0 0 0; font-size: 14px; color: #8b949e;">Ablation study and verification overhead analysis</p>
+  </div>
+  
+  <!-- Content zone -->
+  <div class="row fill-height" style="padding: 16px 20px 16px 26px; gap: 24px;">
+    
+    <!-- Left: Ablation chart -->
+    <div class="col" style="flex: 1; gap: 12px;">
+      
+      <p style="margin: 0; font-size: 13px; color: #a371f7; font-weight: 700;">ABLATION OF HYBRID VERIFICATION</p>
+      
+      <div style="background: #161b22; border-radius: 12px; padding: 20px; flex: 1;">
+        
+        <!-- Bar chart visualization -->
+        <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 16px;">
+          
+          <!-- Baseline reference line -->
+          <div style="position: relative; margin-bottom: 8px;">
+            <div style="position: absolute; left: 0; right: 0; top: 50%; border-top: 2px dashed #8b949e;"></div>
+            <div style="position: absolute; right: 0; top: -8px;">
+              <p style="margin: 0; font-size: 9px; color: #8b949e;">Baseline mean</p>
+            </div>
+          </div>
+          
+          <!-- Rules-only bar -->
+          <div class="row" style="gap: 12px; align-items: center;">
+            <div style="width: 100px;">
+              <p style="margin: 0; font-size: 11px; color: #58a6ff; font-weight: 600;">Rules-only</p>
+            </div>
+            <div style="flex: 1; background: #0d1117; border-radius: 6px; height: 32px; position: relative;">
+              <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 65%; background: linear-gradient(90deg, #58a6ff 0%, #388bfd 100%); border-radius: 6px;"></div>
+              <p style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); margin: 0; font-size: 10px; color: #e6edf3;">1.45</p>
+            </div>
+          </div>
+          
+          <!-- Sim-only bar -->
+          <div class="row" style="gap: 12px; align-items: center;">
+            <div style="width: 100px;">
+              <p style="margin: 0; font-size: 11px; color: #f78166; font-weight: 600;">Sim-only</p>
+            </div>
+            <div style="flex: 1; background: #0d1117; border-radius: 6px; height: 32px; position: relative;">
+              <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 70%; background: linear-gradient(90deg, #f78166 0%, #da5a44 100%); border-radius: 6px;"></div>
+              <p style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); margin: 0; font-size: 10px; color: #e6edf3;">1.52</p>
+            </div>
+          </div>
+          
+          <!-- Full (LLM-gated) bar -->
+          <div class="row" style="gap: 12px; align-items: center;">
+            <div style="width: 100px;">
+              <p style="margin: 0; font-size: 11px; color: #a371f7; font-weight: 600;">Full (LLM)</p>
+            </div>
+            <div style="flex: 1; background: #0d1117; border-radius: 6px; height: 32px; position: relative;">
+              <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 82%; background: linear-gradient(90deg, #a371f7 0%, #8957e5 100%); border-radius: 6px;"></div>
+              <p style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); margin: 0; font-size: 10px; color: #e6edf3;">1.78</p>
+            </div>
+          </div>
+          
+          <!-- X-axis label -->
+          <p style="margin: 8px 0 0 112px; font-size: 10px; color: #8b949e;">Throughput (tasks/cycle) →</p>
+          
+        </div>
+        
+      </div>
+      
+      <!-- Insight box -->
+      <div style="background: rgba(163, 113, 247, 0.1); border: 1px solid #a371f7; border-radius: 8px; padding: 12px;">
+        <p style="margin: 0; font-size: 11px; color: #e6edf3; line-height: 1.5;"><strong style="color: #a371f7;">Insight:</strong> Rules + short rollouts recover most benefit. LLM gating adds targeted gains, especially at higher contention levels.</p>
+      </div>
+      
+    </div>
+    
+    <!-- Right: Overhead table -->
+    <div class="col" style="width: 42%; gap: 12px;">
+      
+      <p style="margin: 0; font-size: 13px; color: #d29922; font-weight: 700;">VERIFICATION OVERHEAD</p>
+      
+      <!-- Table -->
+      <div style="background: #161b22; border-radius: 12px; padding: 16px;">
+        
+        <!-- Header -->
+        <div class="row" style="gap: 8px; padding-bottom: 10px; border-bottom: 1px solid #30363d; margin-bottom: 10px;">
+          <div style="flex: 2;">
+            <p style="margin: 0; font-size: 10px; color: #8b949e; font-weight: 600;">Configuration</p>
+          </div>
+          <div style="flex: 1; text-align: right;">
+            <p style="margin: 0; font-size: 10px; color: #8b949e; font-weight: 600;">Verify (ms)</p>
+          </div>
+          <div style="flex: 1; text-align: right;">
+            <p style="margin: 0; font-size: 10px; color: #8b949e; font-weight: 600;">LLM (ms)</p>
+          </div>
+        </div>
+        
+        <!-- Row 1 -->
+        <div class="row" style="gap: 8px; padding: 8px 0; border-bottom: 1px solid #21262d;">
+          <div style="flex: 2;">
+            <p style="margin: 0; font-size: 12px; color: #58a6ff; font-weight: 600;">Rules-only</p>
+          </div>
+          <div style="flex: 1; text-align: right;">
+            <p style="margin: 0; font-size: 12px; color: #e6edf3;">2.6</p>
+          </div>
+          <div style="flex: 1; text-align: right;">
+            <p style="margin: 0; font-size: 12px; color: #8b949e;">0.0</p>
+          </div>
+        </div>
+        
+        <!-- Row 2 -->
+        <div class="row" style="gap: 8px; padding: 8px 0; border-bottom: 1px solid #21262d;">
+          <div style="flex: 2;">
+            <p style="margin: 0; font-size: 12px; color: #f78166; font-weight: 600;">Sim-only</p>
+          </div>
+          <div style="flex: 1; text-align: right;">
+            <p style="margin: 0; font-size: 12px; color: #e6edf3;">12.1</p>
+          </div>
+          <div style="flex: 1; text-align: right;">
+            <p style="margin: 0; font-size: 12px; color: #8b949e;">0.0</p>
+          </div>
+        </div>
+        
+        <!-- Row 3 (highlighted) -->
+        <div class="row" style="gap: 8px; padding: 10px 8px; background: rgba(163, 113, 247, 0.15); border-radius: 6px; margin-top: 4px;">
+          <div style="flex: 2;">
+            <p style="margin: 0; font-size: 12px; color: #a371f7; font-weight: 700;">Full (all)</p>
+          </div>
+          <div style="flex: 1; text-align: right;">
+            <p style="margin: 0; font-size: 14px; color: #e6edf3; font-weight: 700;">18.5</p>
+          </div>
+          <div style="flex: 1; text-align: right;">
+            <p style="margin: 0; font-size: 12px; color: #a371f7;">6.8</p>
+          </div>
+        </div>
+        
+        <p style="margin: 10px 0 0 0; font-size: 9px; color: #8b949e;">Median [IQR] • N=550 runs (50 seeds × 11 p values)</p>
+        
+      </div>
+      
+      <!-- Key insight -->
+      <div style="background: rgba(35, 134, 54, 0.15); border: 2px solid #238636; border-radius: 10px; padding: 16px; text-align: center;">
+        <p style="margin: 0 0 8px 0; font-size: 11px; color: #238636; font-weight: 700;">OVERHEAD IS NEGLIGIBLE</p>
+        <p style="margin: 0; font-size: 24px; color: #e6edf3; font-weight: 700;">18.5 ms/cycle</p>
+        <p style="margin: 8px 0 0 0; font-size: 11px; color: #8b949e; line-height: 1.4;">Orders of magnitude smaller than task durations</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: #8b949e;">Does not erode throughput</p>
+      </div>
+      
+      <!-- Comparison -->
+      <div style="background: #161b22; border-radius: 8px; padding: 12px;">
+        <div class="row" style="gap: 8px; align-items: center;">
+          <p style="margin: 0; font-size: 10px; color: #8b949e;">Verification:</p>
+          <div style="width: 40px; height: 8px; background: #58a6ff; border-radius: 4px;"></div>
+          <p style="margin: 0; font-size: 10px; color: #8b949e;">vs Task duration:</p>
+          <div style="flex: 1; height: 8px; background: #30363d; border-radius: 4px;"></div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <!-- Bottom bar -->
+  <div style="height: 3px; width: 100%; flex-shrink: 0; background: #a371f7;"></div>
+  
+</body>
+</html>

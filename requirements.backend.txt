@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+pandas
+beeai-framework==0.1.14
+python-dotenv
+fastapi==0.115.12
+python-dateutil
+

@@ -1,0 +1,19 @@
+# .gitignore (snippet to ensure generated figs/ are ignored)
+/backup
+figs/
+__pycache__/
+*.pyc
+.venv/
+.env
+manuscript_results/
+copy *.
+* copy *
+temp/
+* copy*.*
+
+# Pandoc build artifacts
+.pandoc_tmp/
+*.docx
+
+# Generated PNG figures (converted from PDFs for Word)
+final_manuscript/figures/*.png

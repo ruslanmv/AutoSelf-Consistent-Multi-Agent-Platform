@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding the AutoSelf System: An Interactive Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals (Tailwind Zinc) with a Teal accent -->
+    <!-- Application Structure Plan: A tab-based SPA. The main navigation switches between different experiment sections. Each section presents a side-by-side view of the report's text and an interactive visualization (chart with controls). This structure allows users to focus on one experiment at a time while directly interacting with a visual representation of its findings, enhancing comprehension over a static text document. -->
+    <!-- Visualization & Content Choices: Exp1: Line chart with buttons to show resilience scenarios (Goal: Compare, Method: Chart.js). Exp2: Line chart with a slider to show efficiency vs. contention (Goal: Show Change, Method: Chart.js). Exp3: A dashboard of three bar charts with a toggle for contention level to provide a holistic performance comparison (Goal: Compare, Method: Chart.js). This progression of interactive visualizations mirrors the increasing complexity of the experiments themselves. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f4f5; /* zinc-100 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .tab.active {
+            border-color: #14b8a6; /* teal-500 */
+            color: #0f766e; /* teal-700 */
+            background-color: #f0fdfa; /* teal-50 */
+        }
+        .control-btn.active {
+            background-color: #0d9488; /* teal-600 */
+            color: white;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+         .control-btn {
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-zinc-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-3xl md:text-5xl font-bold text-zinc-900">Understanding the AutoSelf System</h1>
+            <p class="text-lg md:text-xl text-zinc-600 mt-2">An Interactive Report on the Experimental Validation</p>
+        </header>
+
+        <main class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
+            <nav class="flex flex-wrap border-b border-zinc-200 mb-6 -mx-4 px-4">
+                <button class="tab text-sm md:text-base font-semibold py-3 px-4 md:px-6 border-b-2 border-transparent hover:bg-zinc-100 hover:text-zinc-700 transition-colors duration-200" data-tab="intro">Overall Goal</button>
+                <button class="tab text-sm md:text-base font-semibold py-3 px-4 md:px-6 border-b-2 border-transparent hover:bg-zinc-100 hover:text-zinc-700 transition-colors duration-200" data-tab="exp1">Experiment 1: Resilience</button>
+                <button class="tab text-sm md:text-base font-semibold py-3 px-4 md:px-6 border-b-2 border-transparent hover:bg-zinc-100 hover:text-zinc-700 transition-colors duration-200" data-tab="exp2">Experiment 2: Efficiency</button>
+                <button class="tab text-sm md:text-base font-semibold py-3 px-4 md:px-6 border-b-2 border-transparent hover:bg-zinc-100 hover:text-zinc-700 transition-colors duration-200" data-tab="exp3">Experiment 3: Holistic AI</button>
+            </nav>
+
+            <div id="content-area" class="min-h-[60vh]">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </main>
+
+        <footer class="text-center mt-8 text-zinc-500 text-sm">
+            <p>Interactive Report generated from the AutoSelf Experiments Documentation.</p>
+        </footer>
+    </div>
+
+    <script>
+        const reportData = {
+            intro: {
+                title: "Overall Goal",
+                content: `
+                    <p class="text-zinc-600 leading-relaxed mb-4">The primary goal of this research is to design, implement, and validate <strong>AutoSelf</strong>, an intelligent orchestration system for autonomous multi-robot construction in unstructured environments like the Moon or Mars. Such a system must be resilient, efficient, and capable of making complex decisions without human intervention.</p>
+                    <p class="text-zinc-600 leading-relaxed">To test these capabilities, we designed a series of three experiments of progressively increasing complexity. Each experiment isolates and evaluates a critical aspect of the system's performance, building a comprehensive case for its effectiveness.</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 text-zinc-600">
+                        <li><strong>Experiment 1</strong> tests fundamental <strong>reactivity and resilience</strong> to physical-world problems.</li>
+                        <li><strong>Experiment 2</strong> tests <strong>proactive optimization and efficiency</strong> in scheduling.</li>
+                        <li><strong>Experiment 3</strong> serves as a final exam, testing <strong>holistic, AI-driven decision-making</strong> in a complex, dynamic environment where both types of challenges occur simultaneously.</li>
+                    </ul>
+                `
+            },
+            exp1: {
+                title: "Experiment 1: Resilience to Physical Hazards and Failures",
+                sections: [
+                    {
+                        heading: "Goal",
+                        text: "To prove that the AutoSelf system's core <strong>Execution-Verification-Correction (E-V-C)</strong> loop is fundamentally robust. The experiment is designed to answer the question: Can the system safely and efficiently react to unexpected physical problems in the environment and within its own hardware?"
+                    },
+                    {
+                        heading: "What We Measured and Analyzed",
+                        text: "We compared the AutoSelf orchestrator against a simple First-In-First-Out (FIFO) baseline. The primary metric was <strong>Mission Makespan (Duration)</strong>, measuring the total time to complete all tasks. A successful system should pause during a hazard and retry after a failure, completing the mission with a reasonable delay. This demonstrates efficient recovery and validates the core safety loop."
+                    }
+                ],
+                viz: `
+                    <h3 class="text-lg font-semibold text-center mb-1">Interactive Simulation: Mission Timeline</h3>
+                    <p class="text-center text-sm text-zinc-500 mb-4">Click to simulate different mission scenarios.</p>
+                    <div class="chart-container h-72 md:h-80 w-full max-w-2xl mx-auto">
+                        <canvas id="exp1Chart"></canvas>
+                    </div>
+                    <div id="exp1-controls" class="flex justify-center items-center gap-2 md:gap-4 mt-4 flex-wrap">
+                        <button class="control-btn text-sm md:text-base py-2 px-4 rounded-lg bg-zinc-100 hover:bg-zinc-200" data-scenario="nominal">Nominal Run</button>
+                        <button class="control-btn text-sm md:text-base py-2 px-4 rounded-lg bg-zinc-100 hover:bg-zinc-200" data-scenario="hazard">Inject Dust Storm</button>
+                        <button class="control-btn text-sm md:text-base py-2 px-4 rounded-lg bg-zinc-100 hover:bg-zinc-200" data-scenario="failure">Inject Nozzle Clog</button>
+                    </div>
+                `
+            },
+            exp2: {
+                title: "Experiment 2: Efficiency Under Resource Contention",
+                 sections: [
+                    {
+                        heading: "Goal",
+                        text: "To prove that the AutoSelf system can do more than just react—it can <strong>proactively optimize its schedule to maximize efficiency</strong>. The experiment answers: Can the system use prediction to avoid wasting time on preventable scheduling conflicts?"
+                    },
+                    {
+                        heading: "What We Measured and Analyzed",
+                        text: "Performance was measured as the contention probability <strong>'p'</strong> was swept from low to high. The primary metric was <strong>Throughput (Tasks per Cycle)</strong>. We expected the baseline's throughput to collapse as 'p' increases, while AutoSelf's degrades more gracefully, proving its predictive optimization is effective."
+                    }
+                ],
+                 viz: `
+                    <h3 class="text-lg font-semibold text-center mb-1">Interactive Simulation: Throughput vs. Contention</h3>
+                    <p class="text-center text-sm text-zinc-500 mb-4">Drag the slider to adjust resource contention probability.</p>
+                    <div class="chart-container h-72 md:h-80 w-full max-w-2xl mx-auto">
+                        <canvas id="exp2Chart"></canvas>
+                    </div>
+                    <div id="exp2-controls" class="flex flex-col justify-center items-center gap-2 mt-4 max-w-md mx-auto">
+                        <label for="contention-slider" class="w-full text-center font-medium">Contention Probability (p): <span id="slider-value" class="font-bold text-teal-600">0.5</span></label>
+                        <input id="contention-slider" type="range" min="0" max="1" step="0.05" value="0.5" class="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer">
+                    </div>
+                `
+            },
+            exp3: {
+                title: "Experiment 3: Holistic Decision-Making in a Complex Environment",
+                sections: [
+                    {
+                        heading: "Goal",
+                        text: "This is the \"final exam.\" It aims to prove that an AI-driven AutoSelf system can <strong>make effective, holistic decisions</strong> by synthesizing information about multiple, simultaneous, and distinct challenges. It answers: Can the system outperform a rigid, rule-based approach in a realistic, messy, and dynamic environment?"
+                    },
+                    {
+                        heading: "What We Measured and Analyzed",
+                        text: "In a world with both physical hazards and resource conflicts, we compared the AI Director against a rule-based baseline. We measured makespan, throughput, and conflicts to see if the AI could achieve superior performance across all key metrics, proving the value of its holistic decision-making."
+                    }
+                ],
+                viz: `
+                    <h3 class="text-lg font-semibold text-center mb-1">Interactive Simulation: Performance Dashboard</h3>
+                    <p class="text-center text-sm text-zinc-500 mb-4">Select a contention level to compare strategies.</p>
+                    <div id="exp3-charts" class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4">
+                        <div class="chart-container h-64 md:h-72 w-full max-w-xs mx-auto"><canvas id="exp3ChartMakespan"></canvas></div>
+                        <div class="chart-container h-64 md:h-72 w-full max-w-xs mx-auto"><canvas id="exp3ChartThroughput"></canvas></div>
+                        <div class="chart-container h-64 md:h-72 w-full max-w-xs mx-auto"><canvas id="exp3ChartConflicts"></canvas></div>
+                    </div>
+                     <div id="exp3-controls" class="flex justify-center items-center gap-2 md:gap-4 mt-6 flex-wrap">
+                        <button class="control-btn text-sm md:text-base py-2 px-4 rounded-lg bg-zinc-100 hover:bg-zinc-200" data-level="low">Low Contention (p=0.2)</button>
+                        <button class="control-btn text-sm md:text-base py-2 px-4 rounded-lg bg-zinc-100 hover:bg-zinc-200" data-level="medium">Medium Contention (p=0.5)</button>
+                        <button class="control-btn text-sm md:text-base py-2 px-4 rounded-lg bg-zinc-100 hover:bg-zinc-200" data-level="high">High Contention (p=0.8)</button>
+                    </div>
+                `
+            }
+        };
+
+        const contentArea = document.getElementById('content-area');
+        const tabs = document.querySelectorAll('.tab');
+        let activeCharts = [];
+
+        function renderContent(tabId) {
+            activeCharts.forEach(chart => chart.destroy());
+            activeCharts = [];
+
+            const data = reportData[tabId];
+            if (!data) {
+                contentArea.innerHTML = '<p>Content not found.</p>';
+                return;
+            }
+
+            if (tabId === 'intro') {
+                contentArea.innerHTML = `
+                    <div class="max-w-4xl mx-auto">
+                        <h2 class="text-2xl md:text-3xl font-bold text-zinc-800 mb-6">${data.title}</h2>
+                        ${data.content}
+                    </div>
+                `;
+            } else {
+                let sectionsHtml = data.sections.map(section => `
+                    <div class="mb-6">
+                        <h3 class="text-xl md:text-2xl font-semibold text-zinc-800 mb-2">${section.heading}</h3>
+                        <p class="text-zinc-600 leading-relaxed">${section.text}</p>
+                    </div>
+                `).join('');
+
+                contentArea.innerHTML = `
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-zinc-800 mb-6">${data.title}</h2>
+                            ${sectionsHtml}
+                        </div>
+                        <div class="bg-zinc-50 p-4 rounded-xl border border-zinc-200">${data.viz}</div>
+                    </div>
+                `;
+            }
+
+            // Initialize charts and controls after rendering
+            if (tabId === 'exp1') initExp1();
+            if (tabId === 'exp2') initExp2();
+            if (tabId === 'exp3') initExp3();
+            
+            tabs.forEach(t => {
+                t.classList.toggle('active', t.dataset.tab === tabId);
+            });
+        }
+
+        function initExp1() {
+            const ctx = document.getElementById('exp1Chart').getContext('2d');
+            const data = {
+                nominal: {
+                    labels: [0, 10, 20, 30, 40, 50, 60, 70],
+                    datasets: [{ data: [0, 1, 2, 3, 4, 5, 6, 7], label: 'Tasks Completed' }]
+                },
+                hazard: {
+                    labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90],
+                    datasets: [{ data: [0, 1, 2, 2, 2, 2, 3, 4, 5, 6], label: 'Tasks Completed (Hazard)' }]
+                },
+                failure: {
+                    labels: [0, 10, 20, 30, 35, 45, 55, 65, 75],
+                    datasets: [{ data: [0, 1, 2, 3, 3, 4, 5, 6, 7], label: 'Tasks Completed (Failure)' }]
+                },
+            };
+
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.nominal.labels,
+                    datasets: [{
+                        ...data.nominal.datasets[0],
+                        borderColor: '#14b8a6',
+                        backgroundColor: 'rgba(20, 184, 166, 0.1)',
+                        fill: true,
+                        tension: 0.1,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#14b8a6',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: 'Tasks Completed' } },
+                        x: { title: { display: true, text: 'Mission Time (seconds)' } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+            activeCharts.push(chart);
+
+            const controls = document.getElementById('exp1-controls');
+            controls.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    const scenario = e.target.dataset.scenario;
+                    chart.data.labels = data[scenario].labels;
+                    chart.data.datasets[0].data = data[scenario].datasets[0].data;
+                    chart.data.datasets[0].label = data[scenario].datasets[0].label;
+                    chart.update();
+                    
+                    controls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                }
+            });
+            controls.querySelector('[data-scenario="nominal"]').classList.add('active');
+        }
+
+        function initExp2() {
+            const ctx = document.getElementById('exp2Chart').getContext('2d');
+            const slider = document.getElementById('contention-slider');
+            const sliderValue = document.getElementById('slider-value');
+
+            const baselineData = (p) => Array.from({ length: 21 }, (_, i) => {
+                const x = i * 0.05;
+                const throughput = 2 * (1 - p * x);
+                return { x: x, y: Math.max(0, throughput * (1 - (x * p * 2))) };
+            });
+
+            const autoselfData = (p) => Array.from({ length: 21 }, (_, i) => {
+                const x = i * 0.05;
+                const throughput = 2 - p * x;
+                return { x: x, y: Math.max(0, throughput * (1 - (x * p * 0.5))) };
+            });
+
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Naive Baseline',
+                            data: baselineData(0.5),
+                            borderColor: '#f43f5e', // rose-500
+                            backgroundColor: 'rgba(244, 63, 94, 0.1)',
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'AutoSelf Orchestrator',
+                            data: autoselfData(0.5),
+                            borderColor: '#14b8a6', // teal-500
+                            backgroundColor: 'rgba(20, 184, 166, 0.1)',
+                            fill: false,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: 'Throughput (Tasks per Cycle)' } },
+                        x: { type: 'linear', position: 'bottom', title: { display: true, text: 'Mission Progress (Simulated)' }, min:0, max:1 }
+                    }
+                }
+            });
+            activeCharts.push(chart);
+
+            slider.addEventListener('input', (e) => {
+                const p = parseFloat(e.target.value);
+                sliderValue.textContent = p.toFixed(2);
+                chart.data.datasets[0].data = baselineData(p);
+                chart.data.datasets[1].data = autoselfData(p);
+                chart.update();
+            });
+        }
+        
+        function initExp3() {
+            const data = {
+                low: { makespan: [110, 95], throughput: [0.064, 0.074], conflicts: [8, 1] },
+                medium: { makespan: [185, 110], throughput: [0.038, 0.064], conflicts: [25, 2] },
+                high: { makespan: [250, 125], throughput: [0.028, 0.056], conflicts: [41, 3] }
+            };
+
+            const createChart = (canvasId, title, data) => {
+                const ctx = document.getElementById(canvasId).getContext('2d');
+                const chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Rule-Based Baseline', 'AutoSelf (AI Director)'],
+                        datasets: [{
+                            label: title,
+                            data: data,
+                            backgroundColor: ['#f43f5e', '#14b8a6'],
+                            borderColor: ['#be123c', '#0f766e'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            title: { display: true, text: title, font: { size: 14 } }
+                        },
+                         scales: { x: { beginAtZero: true } }
+                    }
+                });
+                activeCharts.push(chart);
+                return chart;
+            };
+
+            const makespanChart = createChart('exp3ChartMakespan', 'Makespan (s) (↓ better)', data.medium.makespan);
+            const throughputChart = createChart('exp3ChartThroughput', 'Throughput (tasks/s) (↑ better)', data.medium.throughput);
+            const conflictsChart = createChart('exp3ChartConflicts', 'Conflicts Encountered (↓ better)', data.medium.conflicts);
+
+            const controls = document.getElementById('exp3-controls');
+            controls.addEventListener('click', e => {
+                if (e.target.tagName === 'BUTTON') {
+                    const level = e.target.dataset.level;
+                    makespanChart.data.datasets[0].data = data[level].makespan;
+                    throughputChart.data.datasets[0].data = data[level].throughput;
+                    conflictsChart.data.datasets[0].data = data[level].conflicts;
+                    makespanChart.update();
+                    throughputChart.update();
+                    conflictsChart.update();
+                    
+                    controls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                }
+            });
+             controls.querySelector('[data-level="medium"]').classList.add('active');
+        }
+
+        // Initial render
+        document.addEventListener('DOMContentLoaded', () => {
+             renderContent('intro');
+
+             tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    renderContent(tab.dataset.tab);
+                });
+             });
+        });
+
+    </script>
+</body>
+</html>

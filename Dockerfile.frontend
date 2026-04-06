@@ -1,0 +1,16 @@
+# Dockerfile.frontend
+FROM python:3.11-slim
+WORKDIR /app
+
+# Copy the frontend-specific requirements file
+COPY requirements.frontend.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.frontend.txt
+
+# Copy the client script and its templates directory
+COPY client.py .
+COPY templates ./templates
+
+EXPOSE 5000
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "client:app"]

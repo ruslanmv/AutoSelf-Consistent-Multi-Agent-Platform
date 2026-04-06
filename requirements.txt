@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+python-dotenv
+beeai_framework==0.1.47 
+requests
+flask
+#htmx
+pyngrok
+plotly
+pandas
+#kaleido
+matplotlib

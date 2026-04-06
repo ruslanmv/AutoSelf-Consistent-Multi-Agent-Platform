@@ -1,0 +1,45 @@
+# .github/workflows/ci.yml
+name: ci-artifacts
+
+on:
+  pull_request:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-repro:
+    runs-on: ubuntu-latest
+    env:
+      AUTOSELF_RESULTS_DIR: results
+      AUTOSELF_FIGS_DIR: figs
+      AUTOSELF_CONFIG_DIR: configs
+      AUTOSELF_MANUSCRIPT_DIR: manuscript_results
+      CI_MODE: 1
+      LLM: off
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: requirements-lock.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-lock.txt
+      - name: Reproduce artifacts
+        run: |
+          chmod +x scripts/reproduce.sh || true
+          ./scripts/reproduce.sh
+      - name: Upload results/
+        uses: actions/upload-artifact@v4
+        with:
+          name: results
+          path: results
+      - name: Upload figs/
+        uses: actions/upload-artifact@v4
+        with:
+          name: figs
+          path: figs

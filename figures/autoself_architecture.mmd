@@ -1,0 +1,62 @@
+%%{init: {'themeVariables': { 'fontSize': '16px', 'edgeWidth': 1, 'lineColor': '#444' }}}%%
+graph TD;
+    %% User & Frontend Interaction
+    User[User] --> Frontend[Frontend: Next.js + React UI];
+    Frontend --> FastAPI[Backend: FastAPI];
+
+    %% Orchestrator
+    FastAPI --> Orchestrator[AutoSelf Orchestrator Agent];
+
+    %% Robotic Agents
+    Orchestrator --> Agent1[3D Printer Robot];
+    Orchestrator --> Agent2[Assembly Robot];
+    Orchestrator --> Agent3[Transport Rover];
+    Orchestrator --> Agent4[Inspection Drone];
+
+    %% Agent Feedback
+    Agent1 --> Orchestrator;
+    Agent2 --> Orchestrator;
+    Agent3 --> Orchestrator;
+    Agent4 --> Orchestrator;
+
+    %% Verification & Correction
+    Orchestrator --> Verification[Verification Module: Digital Twin/Simulation/AI];
+    Verification --> Correction[Correction Module: Task Adjustment];
+    Correction --> Orchestrator;
+
+    %% Data Management Layer
+    Orchestrator --> StructuredDB[Structured Database];
+    Orchestrator --> VectorDB[Vector Database];
+    Orchestrator --> KnowledgeGraph[Knowledge Graph];
+    Orchestrator --> Logs[System Logs];
+
+    %% Security Layer
+    Security[Security & Compliance] --> Orchestrator;
+    Security --> StructuredDB;
+
+    %% Containerization
+    subgraph Containerization
+        Podman[Podman / Docker];
+        Podman --> Agent1;
+        Podman --> Agent2;
+        Podman --> Agent3;
+        Podman --> Agent4;
+    end
+
+    %% Output
+    Orchestrator --> FastAPI;
+    FastAPI --> Frontend;
+
+    %% Styling for nodes
+    classDef orchestrator fill:#f9f,stroke:#333,stroke-width:1px,color:#000,font-size:16px
+    classDef agents fill:#bbf,stroke:#333,stroke-width:1px,color:#000,font-size:15px
+    classDef modules fill:#ff9,stroke:#333,stroke-width:1px,color:#000,font-size:15px
+    classDef storage fill:#9ff,stroke:#333,stroke-width:1px,color:#000,font-size:15px
+    classDef frontend fill:#afa,stroke:#333,stroke-width:1px,color:#000,font-size:15px
+
+    %% Node classes
+    class User,Frontend,FastAPI frontend
+    class Orchestrator orchestrator
+    class Agent1,Agent2,Agent3,Agent4 agents
+    class Verification,Correction,Security modules
+    class StructuredDB,VectorDB,KnowledgeGraph,Logs storage

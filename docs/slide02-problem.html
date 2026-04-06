@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Problem</title>
+  <style>
+    :root {
+      --color-surface: #0d1117;
+      --color-surface-foreground: #e6edf3;
+      --color-primary: #58a6ff;
+      --color-secondary: #f78166;
+      --color-muted: #161b22;
+      --color-muted-foreground: #8b949e;
+      --color-accent: #d29922;
+      --color-border: #30363d;
+    }
+  </style>
+  <script src="scale.js" defer></script>
+  <script src="nav.js" defer></script>
+</head>
+<body class="col" style="width: 960px; height: 540px; background: #0d1117; position: relative;">
+  
+  <!-- Left accent bar -->
+  <div style="position: absolute; left: 0; top: 0; width: 6px; height: 100%; background: #f78166;"></div>
+  
+  <!-- Title zone -->
+  <div style="width: 920px; margin: 0 20px 0 26px; padding-top: 24px;" class="fit">
+    <h1 style="margin: 0; font-size: 32px; color: #e6edf3; font-weight: 700;">The Challenge: Building on Mars</h1>
+    <p style="margin: 6px 0 0 0; font-size: 14px; color: #8b949e;">Before astronauts arrive, robots must build — autonomously</p>
+  </div>
+  
+  <!-- Content zone -->
+  <div class="row fill-height" style="padding: 16px 20px 16px 26px; gap: 20px;">
+    
+    <!-- Left column: Key challenges -->
+    <div class="col" style="width: 55%; gap: 12px;">
+      
+      <!-- Challenge cards -->
+      <div class="row" style="gap: 12px;">
+        <div style="flex: 1; background: #161b22; border-radius: 8px; padding: 14px; border-left: 3px solid #f78166;">
+          <p style="margin: 0 0 6px 0; font-size: 13px; color: #f78166; font-weight: 600;">⏱ COMMUNICATION DELAY</p>
+          <p style="margin: 0; font-size: 12px; color: #e6edf3; line-height: 1.4;">4-24 minute one-way light time precludes continuous teleoperation</p>
+        </div>
+        <div style="flex: 1; background: #161b22; border-radius: 8px; padding: 14px; border-left: 3px solid #58a6ff;">
+          <p style="margin: 0 0 6px 0; font-size: 13px; color: #58a6ff; font-weight: 600;">📡 LIMITED BANDWIDTH</p>
+          <p style="margin: 0; font-size: 12px; color: #e6edf3; line-height: 1.4;">Cannot stream real-time sensor data for remote decision-making</p>
+        </div>
+      </div>
+      
+      <div class="row" style="gap: 12px;">
+        <div style="flex: 1; background: #161b22; border-radius: 8px; padding: 14px; border-left: 3px solid #d29922;">
+          <p style="margin: 0 0 6px 0; font-size: 13px; color: #d29922; font-weight: 600;">🔧 TIGHTLY COUPLED TASKS</p>
+          <p style="margin: 0; font-size: 12px; color: #e6edf3; line-height: 1.4;">3D printing, assembly, transport require precise coordination</p>
+        </div>
+        <div style="flex: 1; background: #161b22; border-radius: 8px; padding: 14px; border-left: 3px solid #a371f7;">
+          <p style="margin: 0 0 6px 0; font-size: 13px; color: #a371f7; font-weight: 600;">⚠️ ERROR CASCADES</p>
+          <p style="margin: 0; font-size: 12px; color: #e6edf3; line-height: 1.4;">Small timing errors → collisions, defects, power violations</p>
+        </div>
+      </div>
+      
+      <!-- Core insight box -->
+      <div style="background: rgba(88, 166, 255, 0.1); border: 1px solid #58a6ff; border-radius: 8px; padding: 14px; margin-top: 8px;">
+        <p style="margin: 0; font-size: 13px; color: #58a6ff; font-weight: 600;">CORE INSIGHT</p>
+        <p style="margin: 6px 0 0 0; font-size: 14px; color: #e6edf3; line-height: 1.5;">Robots must not only <strong>allocate tasks</strong> but continuously ensure that planned actions remain <strong>safe</strong> and <strong>mutually consistent</strong>.</p>
+      </div>
+      
+    </div>
+    
+    <!-- Right column: Visual representation -->
+    <div class="col" style="width: 45%; justify-content: center;">
+      <div style="background: #161b22; border-radius: 12px; padding: 20px; text-align: center;">
+        <p style="margin: 0 0 12px 0; font-size: 11px; color: #8b949e; letter-spacing: 1px;">HETEROGENEOUS ROBOTIC TEAM</p>
+        <div class="row" style="gap: 16px; justify-content: center; margin-bottom: 16px;">
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; background: #58a6ff; border-radius: 8px; margin: 0 auto 6px auto; display: flex; align-items: center; justify-content: center;">
+              <p style="margin: 0; font-size: 20px;">🖨️</p>
+            </div>
+            <p style="margin: 0; font-size: 10px; color: #e6edf3;">3D Printer</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; background: #f78166; border-radius: 8px; margin: 0 auto 6px auto; display: flex; align-items: center; justify-content: center;">
+              <p style="margin: 0; font-size: 20px;">🦾</p>
+            </div>
+            <p style="margin: 0; font-size: 10px; color: #e6edf3;">Assembly</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; background: #d29922; border-radius: 8px; margin: 0 auto 6px auto; display: flex; align-items: center; justify-content: center;">
+              <p style="margin: 0; font-size: 20px;">🚗</p>
+            </div>
+            <p style="margin: 0; font-size: 10px; color: #e6edf3;">Transport</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; background: #a371f7; border-radius: 8px; margin: 0 auto 6px auto; display: flex; align-items: center; justify-content: center;">
+              <p style="margin: 0; font-size: 20px;">🔍</p>
+            </div>
+            <p style="margin: 0; font-size: 10px; color: #e6edf3;">Inspection</p>
+          </div>
+        </div>
+        <div style="border-top: 1px solid #30363d; padding-top: 12px;">
+          <p style="margin: 0; font-size: 12px; color: #8b949e;">All sharing limited power • Exclusive tools • Workzones</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Bottom bar -->
+  <div style="height: 3px; width: 100%; flex-shrink: 0; background: linear-gradient(90deg, #f78166 0%, #58a6ff 100%);"></div>
+  
+</body>
+</html>

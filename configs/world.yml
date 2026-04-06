@@ -1,0 +1,41 @@
+# configs/world.yml
+
+mission_plan:
+  # Primary mission path
+  - name: "Excavate Foundation Pit"
+    capability: "excavation"
+    duration: 60
+    output_state: "foundation_pit_dug"
+    dependencies: []
+
+  - name: "Print Foundation"
+    capability: "printing_3d"
+    duration: 120
+    output_state: "foundation_printed"
+    dependencies: ["foundation_pit_dug"]
+
+  - name: "Install Superstructure"
+    capability: "construction"
+    duration: 90
+    output_state: "superstructure_installed"
+    dependencies: ["foundation_printed"]
+
+  # --- NEW: Alternative & Mitigation Tasks ---
+  # These tasks have no dependencies, so the AI can choose them at any time if they are safe.
+  - name: "Survey Alternate Site"
+    capability: "robot_mobility"   # A capability assumed to be safe during many hazards
+    duration: 30
+    output_state: "alternate_site_surveyed"
+    dependencies: []
+
+  - name: "Run Weather Monitoring"
+    capability: "sensors"          # A safe, diagnostic task to run during dust storms
+    duration: 10
+    output_state: "weather_data_updated"
+    dependencies: []
+
+  - name: "Calibrate Seismic Sensors"
+    capability: "sensors"          # Another safe task, useful during seismic alerts
+    duration: 15
+    output_state: "seismic_sensors_calibrated"
+    dependencies: []

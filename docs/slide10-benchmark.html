@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Benchmark Results</title>
+  <style>
+    :root {
+      --color-surface: #0d1117;
+      --color-surface-foreground: #e6edf3;
+      --color-primary: #58a6ff;
+      --color-secondary: #f78166;
+      --color-muted: #161b22;
+      --color-muted-foreground: #8b949e;
+      --color-accent: #d29922;
+      --color-border: #30363d;
+    }
+  </style>
+  <script src="scale.js" defer></script>
+  <script src="nav.js" defer></script>
+</head>
+<body class="col" style="width: 960px; height: 540px; background: #0d1117; position: relative;">
+  
+  <!-- Left accent bar -->
+  <div style="position: absolute; left: 0; top: 0; width: 6px; height: 100%; background: #238636;"></div>
+  
+  <!-- Title zone -->
+  <div style="width: 920px; margin: 0 20px 0 26px; padding-top: 24px;" class="fit">
+    <h1 style="margin: 0; font-size: 32px; color: #e6edf3; font-weight: 700;">Resource-Contention Benchmark</h1>
+    <p style="margin: 6px 0 0 0; font-size: 14px; color: #8b949e;">Performance under varying contention probability (p) • N=50 seeds • 10 tasks/run</p>
+  </div>
+  
+  <!-- Content zone -->
+  <div class="row fill-height" style="padding: 12px 20px 16px 26px; gap: 20px;">
+    
+    <!-- Left: Throughput chart -->
+    <div class="col" style="flex: 1; gap: 8px;">
+      <p style="margin: 0; font-size: 12px; color: #58a6ff; font-weight: 700;">THROUGHPUT vs CONTENTION</p>
+      
+      <div style="background: #161b22; border-radius: 10px; padding: 14px; flex: 1; position: relative;">
+        
+        <!-- Y-axis -->
+        <div style="position: absolute; left: 4px; top: 50%; transform: rotate(-90deg) translateX(-50%); transform-origin: left center;">
+          <p style="margin: 0; font-size: 9px; color: #8b949e;">Tasks/cycle (↑ better)</p>
+        </div>
+        
+        <div style="margin-left: 28px; height: 100%; position: relative;">
+          <!-- Chart -->
+          <svg style="width: 100%; height: calc(100% - 24px);" viewBox="0 0 300 120" preserveAspectRatio="none">
+            <!-- Grid -->
+            <line x1="0" y1="30" x2="300" y2="30" stroke="#30363d" stroke-width="0.5"/>
+            <line x1="0" y1="60" x2="300" y2="60" stroke="#30363d" stroke-width="0.5"/>
+            <line x1="0" y1="90" x2="300" y2="90" stroke="#30363d" stroke-width="0.5"/>
+            
+            <!-- AutoSelf line (stays high) -->
+            <polyline 
+              points="10,15 60,18 120,22 180,28 240,35 290,42" 
+              fill="none" 
+              stroke="#58a6ff" 
+              stroke-width="3"
+              stroke-linecap="round"/>
+            
+            <!-- Baseline line (drops significantly) -->
+            <polyline 
+              points="10,18 60,28 120,45 180,68 240,88 290,100" 
+              fill="none" 
+              stroke="#f78166" 
+              stroke-width="2.5"
+              stroke-dasharray="6,4"/>
+            
+            <!-- Confidence bands (simplified) -->
+            <polygon 
+              points="10,10 60,12 120,16 180,20 240,28 290,35 290,50 240,42 180,36 120,28 60,24 10,20" 
+              fill="#58a6ff" 
+              opacity="0.15"/>
+          </svg>
+          
+          <!-- X-axis labels -->
+          <div class="row" style="justify-content: space-between;">
+            <p style="margin: 0; font-size: 8px; color: #8b949e;">0.1</p>
+            <p style="margin: 0; font-size: 8px; color: #8b949e;">0.3</p>
+            <p style="margin: 0; font-size: 8px; color: #8b949e;">0.5</p>
+            <p style="margin: 0; font-size: 8px; color: #8b949e;">0.7</p>
+            <p style="margin: 0; font-size: 8px; color: #8b949e;">0.9</p>
+          </div>
+          <p style="margin: 2px 0 0 0; font-size: 8px; color: #8b949e; text-align: center;">Contention probability (p)</p>
+        </div>
+        
+        <!-- Legend -->
+        <div class="row" style="gap: 12px; justify-content: center; margin-top: 6px;">
+          <div class="row" style="gap: 4px; align-items: center;">
+            <div style="width: 14px; height: 3px; background: #58a6ff; border-radius: 1px;"></div>
+            <p style="margin: 0; font-size: 8px; color: #e6edf3;">AutoSelf</p>
+          </div>
+          <div class="row" style="gap: 4px; align-items: center;">
+            <div style="width: 14px; height: 2px; background: #f78166; border-radius: 1px;"></div>
+            <p style="margin: 0; font-size: 8px; color: #e6edf3;">Baseline</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right: Makespan chart -->
+    <div class="col" style="flex: 1; gap: 8px;">
+      <p style="margin: 0; font-size: 12px; color: #d29922; font-weight: 700;">MAKESPAN vs CONTENTION</p>
+      
+      <div style="background: #161b22; border-radius: 10px; padding: 14px; flex: 1; position: relative;">
+        
+        <!-- Y-axis -->
+        <div style="position: absolute; left: 4px; top: 50%; transform: rotate(-90deg) translateX(-50%); transform-origin: left center;">
+          <p style="margin: 0; font-size: 9px; color: #8b949e;">Cycles (↓ better)</p>
+        </div>
+        
+        <div style="margin-left: 28px; height: 100%; position: relative;">
+          <!-- Chart -->
+          <svg style="width: 100%; height: calc(100% - 24px);" viewBox="0 0 300 120" preserveAspectRatio="none">
+            <!-- Grid -->
+            <line x1="0" y1="30" x2="300" y2="30" stroke="#30363d" stroke-width="0.5"/>
+            <line x1="0" y1="60" x2="300" y2="60" stroke="#30363d" stroke-width="0.5"/>
+            <line x1="0" y1="90" x2="300" y2="90" stroke="#30363d" stroke-width="0.5"/>
+            
+            <!-- AutoSelf line (stays low) -->
+            <polyline 
+              points="10,95 60,88 120,75 180,65 240,58 290,55" 
+              fill="none" 
+              stroke="#58a6ff" 
+              stroke-width="3"
+              stroke-linecap="round"/>
+            
+            <!-- Baseline line (increases more) -->
+            <polyline 
+              points="10,92 60,78 120,58 180,40 240,25 290,18" 
+              fill="none" 
+              stroke="#f78166" 
+              stroke-width="2.5"
+              stroke-dasharray="6,4"/>
+          </svg>
+          
+          <!-- X-axis labels -->
+          <div class="row" style="justify-content: space-between;">
+            <p style="margin: 0; font-size: 8px; color: #8b949e;">0.1</p>
+            <p style="margin: 0; font-size: 8px; color: #8b949e;">0.3</p>
+            <p style="margin: 0; font-size: 8px; color: #8b949e;">0.5</p>
+            <p style="margin: 0; font-size: 8px; color: #8b949e;">0.7</p>
+            <p style="margin: 0; font-size: 8px; color: #8b949e;">0.9</p>
+          </div>
+          <p style="margin: 2px 0 0 0; font-size: 8px; color: #8b949e; text-align: center;">Contention probability (p)</p>
+        </div>
+        
+        <!-- Legend -->
+        <div class="row" style="gap: 12px; justify-content: center; margin-top: 6px;">
+          <div class="row" style="gap: 4px; align-items: center;">
+            <div style="width: 14px; height: 3px; background: #58a6ff; border-radius: 1px;"></div>
+            <p style="margin: 0; font-size: 8px; color: #e6edf3;">AutoSelf</p>
+          </div>
+          <div class="row" style="gap: 4px; align-items: center;">
+            <div style="width: 14px; height: 2px; background: #f78166; border-radius: 1px;"></div>
+            <p style="margin: 0; font-size: 8px; color: #e6edf3;">Baseline</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Far right: Key metrics -->
+    <div class="col" style="width: 28%; gap: 10px;">
+      
+      <p style="margin: 0; font-size: 12px; color: #238636; font-weight: 700;">KEY RESULTS @ p=0.7</p>
+      
+      <!-- Throughput gain -->
+      <div style="background: rgba(88, 166, 255, 0.15); border: 1px solid #58a6ff; border-radius: 10px; padding: 14px; text-align: center;">
+        <p style="margin: 0; font-size: 28px; color: #58a6ff; font-weight: 700;">+0.34</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: #e6edf3; font-weight: 600;">tasks/cycle</p>
+        <p style="margin: 4px 0 0 0; font-size: 9px; color: #8b949e;">95% CI [0.28, 0.40]</p>
+      </div>
+      
+      <!-- Makespan reduction -->
+      <div style="background: rgba(210, 153, 34, 0.15); border: 1px solid #d29922; border-radius: 10px; padding: 14px; text-align: center;">
+        <p style="margin: 0; font-size: 28px; color: #d29922; font-weight: 700;">−5</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: #e6edf3; font-weight: 600;">cycles saved</p>
+        <p style="margin: 4px 0 0 0; font-size: 9px; color: #8b949e;">95% CI [4, 7]</p>
+      </div>
+      
+      <!-- Zero conflicts -->
+      <div style="background: rgba(35, 134, 54, 0.15); border: 1px solid #238636; border-radius: 10px; padding: 14px; text-align: center;">
+        <p style="margin: 0; font-size: 28px; color: #238636; font-weight: 700;">0</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: #e6edf3; font-weight: 600;">execution conflicts</p>
+        <p style="margin: 4px 0 0 0; font-size: 9px; color: #8b949e;">Across all p values</p>
+      </div>
+      
+      <!-- Note -->
+      <div style="background: #161b22; border-radius: 8px; padding: 10px;">
+        <p style="margin: 0; font-size: 9px; color: #8b949e; line-height: 1.4;">AutoSelf maintains throughput as contention rises, while FIFO/Auction baselines collapse</p>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <!-- Bottom bar -->
+  <div style="height: 3px; width: 100%; flex-shrink: 0; background: #238636;"></div>
+  
+</body>
+</html>

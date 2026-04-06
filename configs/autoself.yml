@@ -1,0 +1,40 @@
+# configs/autoself.yml
+
+verification:
+  scope: "local-zones"
+  rollout_horizon_steps: 3
+  max_pairs_per_cycle: 2
+  llm_gated: true
+  llm_model: "meta-llama/llama-4-maverick-17b-128e-instruct-fp8"
+  llm_temperature: 0.1
+  llm_top_p: 0.9
+
+  # NEW — energy model + look-ahead guard
+  power_draw_factor: 0.05            # percent of capacity per second (60s task ~ 3% burn)
+  power_reserve: 5.0                 # must not plan below this remaining %, “safety buffer”
+  watt_scale: 1000.0                 # energy accounting only (Joules ~ factor*duration*watt_scale)
+  enable_power_guard: true           # enforce projected-power check pre-dispatch
+
+correction:
+  policy: "minimal-edit"
+  max_retries: 1
+  insert_inspections: true
+
+  # NEW — recovery knobs
+  recharge_rate_pct_per_sec: 1.0     # recharge 1%/sec while paused (simulated waiting)
+  recharge_wait_s: 10.0              # each recharge “wait” step adds this many seconds of sim time
+  allow_alternates: true             # try alternative “safe” tasks if the frontier is power-blocked
+  alternates_max_duration_s: 30      # prefer short alternates to keep progress
+  alternates_safe_caps: ["sensors", "robot_mobility"]
+
+executor:
+  # NEW — capability aliasing to avoid mismatch between YAML and agents
+  capability_aliases:
+    printing_3d:    printing
+    construction:   printing        # or define a proper constructor bot; alias if needed
+    robot_mobility: transport
+    sensors:        sensors         # keep as-is if a sensors-capable agent exists
+
+logging:
+  level: "INFO"
+  write_overhead_ms: true

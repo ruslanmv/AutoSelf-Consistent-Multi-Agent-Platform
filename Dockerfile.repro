@@ -1,0 +1,26 @@
+# Dockerfile.repro
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# System deps (optional fonts for matplotlib)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git ca-certificates && rm -rf /var/lib/apt/lists/*
+
+# Copy repo
+COPY . /app
+
+# Install locked requirements
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements-lock.txt
+
+# Default envs
+ENV AUTOSELF_RESULTS_DIR=results \
+    AUTOSELF_FIGS_DIR=figs \
+    AUTOSELF_CONFIG_DIR=configs \
+    AUTOSELF_MANUSCRIPT_DIR=manuscript_results \
+    CI_MODE=0 \
+    LLM=off
+
+# Run one-click reproduction
+CMD ["bash", "scripts/reproduce.sh"]

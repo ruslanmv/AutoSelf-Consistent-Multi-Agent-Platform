@@ -1,0 +1,17 @@
+
+# configs/baselines.yml
+# Baseline scheduler and benchmark grids
+fifo:
+  max_concurrent: 2                 # capacity per cycle without verification
+contract_net:
+  utility: "shortest-duration"      # tie-break on shortest first
+  rebid_on_failure: true
+contention:
+  p_values: [0.1, 0.3, 0.5, 0.7, 0.9]
+  tasks: 10
+
+# baselines.yml
+sim:
+  max_seconds: 60      # stops after 10 minutes of simulated loops 600   
+  max_cycles:  1000     # or bound by cycles 5000  
+  max_stall_cycles: 10 # if nothing runs for 200 cycles, stop 200

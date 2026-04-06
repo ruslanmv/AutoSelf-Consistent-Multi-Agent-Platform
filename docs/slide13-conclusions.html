@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Conclusions</title>
+  <style>
+    :root {
+      --color-surface: #0d1117;
+      --color-surface-foreground: #e6edf3;
+      --color-primary: #58a6ff;
+      --color-secondary: #f78166;
+      --color-muted: #161b22;
+      --color-muted-foreground: #8b949e;
+      --color-accent: #d29922;
+      --color-border: #30363d;
+    }
+  </style>
+  <script src="scale.js" defer></script>
+  <script src="nav.js" defer></script>
+</head>
+<body class="col" style="width: 960px; height: 540px; background: #0d1117; position: relative;">
+  
+  <!-- Left accent bar -->
+  <div style="position: absolute; left: 0; top: 0; width: 6px; height: 100%; background: #238636;"></div>
+  
+  <!-- Title zone -->
+  <div style="width: 920px; margin: 0 20px 0 26px; padding-top: 24px;" class="fit">
+    <h1 style="margin: 0; font-size: 32px; color: #e6edf3; font-weight: 700;">Conclusions & Future Work</h1>
+  </div>
+  
+  <!-- Content zone -->
+  <div class="row fill-height" style="padding: 16px 20px 16px 26px; gap: 24px;">
+    
+    <!-- Left: Key contributions -->
+    <div class="col" style="flex: 1; gap: 14px;">
+      
+      <p style="margin: 0; font-size: 14px; color: #238636; font-weight: 700;">KEY CONTRIBUTIONS</p>
+      
+      <!-- Contribution 1 -->
+      <div style="background: #161b22; border-radius: 10px; padding: 14px; border-left: 3px solid #58a6ff;">
+        <p style="margin: 0 0 6px 0; font-size: 13px; color: #58a6ff; font-weight: 700;">✓ Verification as First-Class Citizen</p>
+        <p style="margin: 0; font-size: 12px; color: #e6edf3; line-height: 1.5;">No action proceeds until fast check passes. E–V–C loop continuously reconciles plans with reality.</p>
+      </div>
+      
+      <!-- Contribution 2 -->
+      <div style="background: #161b22; border-radius: 10px; padding: 14px; border-left: 3px solid #f78166;">
+        <p style="margin: 0 0 6px 0; font-size: 13px; color: #f78166; font-weight: 700;">✓ Hybrid Intelligence</p>
+        <p style="margin: 0; font-size: 12px; color: #e6edf3; line-height: 1.5;">Rules + digital twin + LLM reasoning. Neurosymbolic grounding prevents hallucinations.</p>
+      </div>
+      
+      <!-- Contribution 3 -->
+      <div style="background: #161b22; border-radius: 10px; padding: 14px; border-left: 3px solid #d29922;">
+        <p style="margin: 0 0 6px 0; font-size: 13px; color: #d29922; font-weight: 700;">✓ Minimal Corrections</p>
+        <p style="margin: 0; font-size: 12px; color: #e6edf3; line-height: 1.5;">Surprises become orderly scheduling edits. Stagger, reorder, reassign, or insert checks.</p>
+      </div>
+      
+      <!-- Results summary -->
+      <div style="background: rgba(35, 134, 54, 0.15); border: 1px solid #238636; border-radius: 10px; padding: 14px;">
+        <p style="margin: 0 0 8px 0; font-size: 12px; color: #238636; font-weight: 700;">DEMONSTRATED IN SIMULATION</p>
+        <div class="row" style="gap: 12px;">
+          <div style="flex: 1; text-align: center;">
+            <p style="margin: 0; font-size: 20px; color: #238636; font-weight: 700;">0</p>
+            <p style="margin: 2px 0 0 0; font-size: 10px; color: #8b949e;">Unsafe states</p>
+          </div>
+          <div style="flex: 1; text-align: center;">
+            <p style="margin: 0; font-size: 20px; color: #58a6ff; font-weight: 700;">+34%</p>
+            <p style="margin: 2px 0 0 0; font-size: 10px; color: #8b949e;">Throughput</p>
+          </div>
+          <div style="flex: 1; text-align: center;">
+            <p style="margin: 0; font-size: 20px; color: #d29922; font-weight: 700;">18ms</p>
+            <p style="margin: 2px 0 0 0; font-size: 10px; color: #8b949e;">Overhead</p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- Right: Future work -->
+    <div class="col" style="width: 42%; gap: 14px;">
+      
+      <p style="margin: 0; font-size: 14px; color: #a371f7; font-weight: 700;">NEXT STEPS</p>
+      
+      <!-- Future 1 -->
+      <div style="background: #161b22; border-radius: 10px; padding: 14px;">
+        <div class="row" style="gap: 10px; align-items: flex-start;">
+          <div style="width: 32px; height: 32px; background: rgba(163, 113, 247, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <p style="margin: 0; font-size: 16px;">🤖</p>
+          </div>
+          <div>
+            <p style="margin: 0; font-size: 12px; color: #a371f7; font-weight: 700;">ROS-Native Integration</p>
+            <p style="margin: 4px 0 0 0; font-size: 11px; color: #8b949e; line-height: 1.4;">Couple to ROS/Gazebo for continuous control and field-calibrated twins</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Future 2 -->
+      <div style="background: #161b22; border-radius: 10px; padding: 14px;">
+        <div class="row" style="gap: 10px; align-items: flex-start;">
+          <div style="width: 32px; height: 32px; background: rgba(163, 113, 247, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <p style="margin: 0; font-size: 16px;">🚀</p>
+          </div>
+          <div>
+            <p style="margin: 0; font-size: 12px; color: #a371f7; font-weight: 700;">Flight-Like Hardening</p>
+            <p style="margin: 4px 0 0 0; font-size: 11px; color: #8b949e; line-height: 1.4;">Harden verification service for space-qualified environments</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Future 3 -->
+      <div style="background: #161b22; border-radius: 10px; padding: 14px;">
+        <div class="row" style="gap: 10px; align-items: flex-start;">
+          <div style="width: 32px; height: 32px; background: rgba(163, 113, 247, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <p style="margin: 0; font-size: 16px;">🏜️</p>
+          </div>
+          <div>
+            <p style="margin: 0; font-size: 12px; color: #a371f7; font-weight: 700;">Regolith Testing</p>
+            <p style="margin: 4px 0 0 0; font-size: 11px; color: #8b949e; line-height: 1.4;">End-to-end builds on relevant simulants</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Quote box -->
+      <div style="background: linear-gradient(135deg, rgba(88, 166, 255, 0.1) 0%, rgba(163, 113, 247, 0.1) 100%); border: 1px solid #58a6ff; border-radius: 10px; padding: 16px; margin-top: 4px;">
+        <p style="margin: 0; font-size: 14px; color: #e6edf3; line-height: 1.6; font-style: italic;">"Turn potential failures into straightforward scheduling edits"</p>
+        <p style="margin: 8px 0 0 0; font-size: 11px; color: #58a6ff; text-align: right;">— AutoSelf Design Philosophy</p>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <!-- Bottom bar -->
+  <div style="height: 3px; width: 100%; flex-shrink: 0; background: #238636;"></div>
+  
+</body>
+</html>

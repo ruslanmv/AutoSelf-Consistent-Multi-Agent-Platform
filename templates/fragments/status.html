@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-5">
+    <h6 class="card-title">World State</h6>
+    <ul class="list-group list-group-flush small">
+      {% for key, value in data.world_state.items() %}
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-0">
+        {{ key.replace('_', ' ').title() }}
+        {% if key == 'dust_storm_active' and value %}
+        <span class="badge bg-danger rounded-pill">ACTIVE</span>
+        {% elif value is sameas true %}
+        <span class="badge bg-success rounded-pill">✔ Done</span>
+        {% elif value is sameas false %}
+        <span class="badge bg-secondary rounded-pill">✖ Pending</span>
+        {% else %}
+        <span class="badge bg-primary rounded-pill">{{ "%.2f"|format(value) }}</span>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="col-md-7">
+    <div class="d-flex justify-content-between align-items-center">
+      <h6 class="card-title">Mission Log</h6>
+      {% if data.is_mission_running %}
+      <span class="badge bg-primary">Running...</span>
+      {% else %}
+      <span class="badge bg-secondary">Stopped</span>
+      {% endif %}
+    </div>
+    <div class="log-container p-2">
+      {% for entry in data.mission_log %}
+      <div>{{ entry }}</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

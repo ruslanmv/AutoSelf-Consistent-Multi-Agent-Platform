@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fault Recovery</title>
+  <style>
+    :root {
+      --color-surface: #0d1117;
+      --color-surface-foreground: #e6edf3;
+      --color-primary: #58a6ff;
+      --color-secondary: #f78166;
+      --color-muted: #161b22;
+      --color-muted-foreground: #8b949e;
+      --color-accent: #d29922;
+      --color-border: #30363d;
+    }
+  </style>
+  <script src="scale.js" defer></script>
+  <script src="nav.js" defer></script>
+</head>
+<body class="col" style="width: 960px; height: 540px; background: #0d1117; position: relative;">
+  
+  <!-- Left accent bar -->
+  <div style="position: absolute; left: 0; top: 0; width: 6px; height: 100%; background: #d29922;"></div>
+  
+  <!-- Title zone -->
+  <div style="width: 920px; margin: 0 20px 0 26px; padding-top: 24px;" class="fit">
+    <h1 style="margin: 0; font-size: 32px; color: #e6edf3; font-weight: 700;">Simulation: Fault Recovery</h1>
+    <p style="margin: 6px 0 0 0; font-size: 14px; color: #8b949e;">Nozzle clog scenario — detect, correct, complete</p>
+  </div>
+  
+  <!-- Content zone -->
+  <div class="row fill-height" style="padding: 16px 20px 16px 26px; gap: 20px;">
+    
+    <!-- Left: Timeline -->
+    <div class="col" style="flex: 1; gap: 12px;">
+      
+      <!-- Timeline header -->
+      <div class="row" style="gap: 12px; align-items: center;">
+        <p style="margin: 0; font-size: 13px; color: #d29922; font-weight: 700;">MISSION TIMELINE</p>
+        <div style="flex: 1; height: 1px; background: #30363d;"></div>
+        <p style="margin: 0; font-size: 11px; color: #8b949e;">N = 50 seeds</p>
+      </div>
+      
+      <!-- Timeline chart -->
+      <div style="background: #161b22; border-radius: 12px; padding: 16px; flex: 1; position: relative;">
+        
+        <!-- Y-axis label -->
+        <div style="position: absolute; left: 8px; top: 50%; transform: rotate(-90deg) translateX(-50%); transform-origin: left center;">
+          <p style="margin: 0; font-size: 10px; color: #8b949e;">Cumulative Tasks</p>
+        </div>
+        
+        <!-- Chart area -->
+        <div style="margin-left: 32px; height: 100%; position: relative;">
+          
+          <!-- Fault detection point -->
+          <div style="position: absolute; left: 35%; top: 40%; transform: translateX(-50%);">
+            <div style="width: 16px; height: 16px; background: #da3633; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+              <p style="margin: 0; font-size: 10px; color: #fff;">!</p>
+            </div>
+            <p style="margin: 2px 0 0 -12px; font-size: 8px; color: #da3633; font-weight: 600;">CLOG DETECTED</p>
+          </div>
+          
+          <!-- Recovery point -->
+          <div style="position: absolute; left: 50%; top: 35%; transform: translateX(-50%);">
+            <div style="width: 16px; height: 16px; background: #238636; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+              <p style="margin: 0; font-size: 10px; color: #fff;">✓</p>
+            </div>
+            <p style="margin: 2px 0 0 -8px; font-size: 8px; color: #238636; font-weight: 600;">RETRY OK</p>
+          </div>
+          
+          <!-- Progress line -->
+          <svg style="width: 100%; height: calc(100% - 30px);" viewBox="0 0 400 150" preserveAspectRatio="none">
+            <!-- Grid lines -->
+            <line x1="0" y1="37.5" x2="400" y2="37.5" stroke="#30363d" stroke-width="0.5"/>
+            <line x1="0" y1="75" x2="400" y2="75" stroke="#30363d" stroke-width="0.5"/>
+            <line x1="0" y1="112.5" x2="400" y2="112.5" stroke="#30363d" stroke-width="0.5"/>
+            
+            <!-- Progress line - rises, small dip at fault, then continues -->
+            <polyline 
+              points="0,140 60,110 100,85 140,65 140,70 200,60 260,40 320,25 400,10" 
+              fill="none" 
+              stroke="#58a6ff" 
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+            
+            <!-- Power line (dashed) -->
+            <polyline 
+              points="0,20 60,22 100,24 140,28 180,26 220,24 280,22 340,21 400,20" 
+              fill="none" 
+              stroke="#8b949e" 
+              stroke-width="1.5"
+              stroke-dasharray="4,4"/>
+          </svg>
+          
+          <!-- X-axis -->
+          <div class="row" style="justify-content: space-between; padding-top: 4px;">
+            <p style="margin: 0; font-size: 9px; color: #8b949e;">0s</p>
+            <p style="margin: 0; font-size: 9px; color: #8b949e;">15s</p>
+            <p style="margin: 0; font-size: 9px; color: #8b949e;">30s</p>
+            <p style="margin: 0; font-size: 9px; color: #8b949e;">45s</p>
+            <p style="margin: 0; font-size: 9px; color: #8b949e;">60s</p>
+          </div>
+          <p style="margin: 4px 0 0 0; font-size: 10px; color: #8b949e; text-align: center;">Mission Time (s)</p>
+        </div>
+        
+        <!-- Legend -->
+        <div class="row" style="gap: 16px; justify-content: center; margin-top: 8px;">
+          <div class="row" style="gap: 4px; align-items: center;">
+            <div style="width: 16px; height: 3px; background: #58a6ff; border-radius: 2px;"></div>
+            <p style="margin: 0; font-size: 9px; color: #8b949e;">Completed tasks</p>
+          </div>
+          <div class="row" style="gap: 4px; align-items: center;">
+            <div style="width: 12px; height: 12px; background: #da3633; border-radius: 50%;"></div>
+            <p style="margin: 0; font-size: 9px; color: #8b949e;">Fault detected</p>
+          </div>
+          <div class="row" style="gap: 4px; align-items: center;">
+            <div style="width: 12px; height: 12px; background: #238636; border-radius: 50%;"></div>
+            <p style="margin: 0; font-size: 9px; color: #8b949e;">Recovery</p>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <!-- Right: Recovery process -->
+    <div class="col" style="width: 35%; gap: 12px;">
+      
+      <p style="margin: 0; font-size: 13px; color: #a371f7; font-weight: 700;">RECOVERY SEQUENCE</p>
+      
+      <!-- Step 1 -->
+      <div style="background: #161b22; border-radius: 8px; padding: 12px;">
+        <div class="row" style="gap: 10px; align-items: center;">
+          <div style="width: 28px; height: 28px; background: #da3633; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+            <p style="margin: 0; font-size: 12px; color: #fff; font-weight: 700;">1</p>
+          </div>
+          <div>
+            <p style="margin: 0; font-size: 11px; color: #da3633; font-weight: 700;">DETECT</p>
+            <p style="margin: 2px 0 0 0; font-size: 10px; color: #8b949e;">Nozzle clog identified via sensor</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Step 2 -->
+      <div style="background: #161b22; border-radius: 8px; padding: 12px;">
+        <div class="row" style="gap: 10px; align-items: center;">
+          <div style="width: 28px; height: 28px; background: #d29922; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+            <p style="margin: 0; font-size: 12px; color: #fff; font-weight: 700;">2</p>
+          </div>
+          <div>
+            <p style="margin: 0; font-size: 11px; color: #d29922; font-weight: 700;">CORRECT</p>
+            <p style="margin: 2px 0 0 0; font-size: 10px; color: #8b949e;">Insert cleaning routine, retry task</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Step 3 -->
+      <div style="background: #161b22; border-radius: 8px; padding: 12px;">
+        <div class="row" style="gap: 10px; align-items: center;">
+          <div style="width: 28px; height: 28px; background: #238636; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+            <p style="margin: 0; font-size: 12px; color: #fff; font-weight: 700;">3</p>
+          </div>
+          <div>
+            <p style="margin: 0; font-size: 11px; color: #238636; font-weight: 700;">CONTINUE</p>
+            <p style="margin: 2px 0 0 0; font-size: 10px; color: #8b949e;">Mission proceeds with short delay</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Results -->
+      <div class="row" style="gap: 10px;">
+        <div style="flex: 1; background: rgba(35, 134, 54, 0.15); border: 1px solid #238636; border-radius: 8px; padding: 12px; text-align: center;">
+          <p style="margin: 0; font-size: 24px; color: #238636; font-weight: 700;">0</p>
+          <p style="margin: 2px 0 0 0; font-size: 9px; color: #e6edf3;">Unsafe States</p>
+        </div>
+        <div style="flex: 1; background: rgba(88, 166, 255, 0.15); border: 1px solid #58a6ff; border-radius: 8px; padding: 12px; text-align: center;">
+          <p style="margin: 0; font-size: 24px; color: #58a6ff; font-weight: 700;">100%</p>
+          <p style="margin: 2px 0 0 0; font-size: 9px; color: #e6edf3;">Completion</p>
+        </div>
+      </div>
+      
+      <!-- Key insight -->
+      <div style="background: rgba(210, 153, 34, 0.1); border: 1px solid #d29922; border-radius: 8px; padding: 10px;">
+        <p style="margin: 0; font-size: 10px; color: #d29922; font-weight: 600;">MINIMAL DISRUPTION</p>
+        <p style="margin: 4px 0 0 0; font-size: 10px; color: #e6edf3; line-height: 1.4;">Build completes with short delay while preserving all safety margins</p>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <!-- Bottom bar -->
+  <div style="height: 3px; width: 100%; flex-shrink: 0; background: #d29922;"></div>
+  
+</body>
+</html>

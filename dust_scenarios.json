@@ -1,0 +1,64 @@
+{
+  "dust_scenarios": [
+    {
+      "name": "Low Visibility Dust Haze",
+      "hazard_key": "dust_storm_active",
+      "severity": "low",
+      "duration_seconds": {
+        "min": 3,
+        "max": 9
+      },
+      "description": "A light haze of suspended dust reduces visibility slightly. Minimal physical risk, but precision tasks requiring optical sensors are compromised.",
+      "affected_capabilities": ["printing", "outfitting"],
+      "allow_alternative_tasks": true
+    },
+    {
+      "name": "Moderate Dust Squall",
+      "hazard_key": "dust_storm_active",
+      "severity": "medium",
+      "duration_seconds": {
+        "min": 6,
+        "max": 18
+      },
+      "description": "Gusts of wind kick up significant dust, clogging mechanical joints and potentially damaging exposed components. Outdoor movement is possible but risky.",
+      "affected_capabilities": ["printing", "deployment", "compaction", "excavation"],
+      "allow_alternative_tasks": true
+    },
+    {
+      "name": "High-Velocity Dust Storm",
+      "hazard_key": "dust_storm_active",
+      "severity": "high",
+      "duration_seconds": {
+        "min": 12,
+        "max": 30
+      },
+      "description": "A severe storm with high-speed particulate matter. Poses a significant physical risk to all external hardware. All outdoor operations must be suspended.",
+      "affected_capabilities": ["excavation", "compaction", "printing", "transport", "deployment", "outfitting"],
+      "allow_alternative_tasks": false
+    },
+    {
+      "name": "Electrostatic Dust Event",
+      "hazard_key": "electrostatic_dust_active",
+      "severity": "high",
+      "duration_seconds": {
+        "min": 4,
+        "max": 12
+      },
+      "description": "Fine dust particles become highly charged, posing a severe risk of short-circuits to all external electronic systems. All agents must enter a shielded standby mode.",
+      "affected_capabilities": ["excavation", "compaction", "printing", "transport", "deployment", "outfitting"],
+      "allow_alternative_tasks": false
+    },
+    {
+      "name": "Passing Rover Dust Plume",
+      "hazard_key": "dust_storm_active",
+      "severity": "low",
+      "duration_seconds": {
+        "min": 1,
+        "max": 2
+      },
+      "description": "A temporary plume of dust kicked up by a nearby moving vehicle. Only affects operations in the immediate vicinity for a very short duration.",
+      "affected_capabilities": ["printing"],
+      "allow_alternative_tasks": true
+    }
+  ]
+}

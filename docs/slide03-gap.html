@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Gap</title>
+  <style>
+    :root {
+      --color-surface: #0d1117;
+      --color-surface-foreground: #e6edf3;
+      --color-primary: #58a6ff;
+      --color-secondary: #f78166;
+      --color-muted: #161b22;
+      --color-muted-foreground: #8b949e;
+      --color-accent: #d29922;
+      --color-border: #30363d;
+    }
+  </style>
+  <script src="scale.js" defer></script>
+  <script src="nav.js" defer></script>
+</head>
+<body class="col" style="width: 960px; height: 540px; background: #0d1117; position: relative;">
+  
+  <!-- Left accent bar -->
+  <div style="position: absolute; left: 0; top: 0; width: 6px; height: 100%; background: #58a6ff;"></div>
+  
+  <!-- Title zone -->
+  <div style="width: 920px; margin: 0 20px 0 26px; padding-top: 24px;" class="fit">
+    <h1 style="margin: 0; font-size: 32px; color: #e6edf3; font-weight: 700;">The Gap: Between Planning and Recovery</h1>
+    <p style="margin: 6px 0 0 0; font-size: 14px; color: #8b949e;">Current approaches leave a critical vulnerability window</p>
+  </div>
+  
+  <!-- Content zone -->
+  <div class="col fill-height" style="padding: 20px 20px 16px 26px; gap: 16px;">
+    
+    <!-- Timeline comparison -->
+    <div class="row" style="gap: 24px;">
+      
+      <!-- One-shot planning -->
+      <div style="flex: 1; background: rgba(247, 129, 102, 0.1); border: 1px solid #f78166; border-radius: 10px; padding: 16px;">
+        <p style="margin: 0 0 10px 0; font-size: 14px; color: #f78166; font-weight: 700;">❌ ONE-SHOT PLANNING</p>
+        <div class="row" style="gap: 8px; align-items: center;">
+          <div style="background: #f78166; border-radius: 6px; padding: 8px 12px;">
+            <p style="margin: 0; font-size: 11px; color: #0d1117; font-weight: 600;">Plan</p>
+          </div>
+          <p style="margin: 0; color: #8b949e;">→</p>
+          <div style="background: rgba(247, 129, 102, 0.3); border-radius: 6px; padding: 8px 12px; flex: 1; text-align: center;">
+            <p style="margin: 0; font-size: 11px; color: #f78166;">Execute blindly...</p>
+          </div>
+          <p style="margin: 0; color: #8b949e;">→</p>
+          <div style="background: #da3633; border-radius: 6px; padding: 8px 12px;">
+            <p style="margin: 0; font-size: 11px; color: #ffffff; font-weight: 600;">Failure</p>
+          </div>
+        </div>
+        <p style="margin: 10px 0 0 0; font-size: 11px; color: #8b949e; line-height: 1.4;">Assumes feasibility persists to execution time. No adaptation to changing conditions.</p>
+      </div>
+      
+      <!-- Post-hoc recovery -->
+      <div style="flex: 1; background: rgba(210, 153, 34, 0.1); border: 1px solid #d29922; border-radius: 10px; padding: 16px;">
+        <p style="margin: 0 0 10px 0; font-size: 14px; color: #d29922; font-weight: 700;">❌ POST-HOC RECOVERY</p>
+        <div class="row" style="gap: 8px; align-items: center;">
+          <div style="background: #d29922; border-radius: 6px; padding: 8px 12px;">
+            <p style="margin: 0; font-size: 11px; color: #0d1117; font-weight: 600;">Execute</p>
+          </div>
+          <p style="margin: 0; color: #8b949e;">→</p>
+          <div style="background: #da3633; border-radius: 6px; padding: 8px 12px;">
+            <p style="margin: 0; font-size: 11px; color: #ffffff; font-weight: 600;">Failure!</p>
+          </div>
+          <p style="margin: 0; color: #8b949e;">→</p>
+          <div style="background: rgba(210, 153, 34, 0.3); border-radius: 6px; padding: 8px 12px; flex: 1; text-align: center;">
+            <p style="margin: 0; font-size: 11px; color: #d29922;">Try to recover...</p>
+          </div>
+        </div>
+        <p style="margin: 10px 0 0 0; font-size: 11px; color: #8b949e; line-height: 1.4;">Behavior Trees, formal monitors — reduce damage <em>after</em> error occurs. Too late!</p>
+      </div>
+      
+    </div>
+    
+    <!-- Arrow pointing down -->
+    <div style="text-align: center;">
+      <p style="margin: 0; font-size: 24px; color: #58a6ff;">↓</p>
+    </div>
+    
+    <!-- AutoSelf approach -->
+    <div style="background: rgba(88, 166, 255, 0.1); border: 2px solid #58a6ff; border-radius: 12px; padding: 20px;">
+      <p style="margin: 0 0 12px 0; font-size: 16px; color: #58a6ff; font-weight: 700;">✓ AutoSelf: CONTINUOUS VERIFICATION</p>
+      <div class="row" style="gap: 12px; align-items: center;">
+        <div style="background: #58a6ff; border-radius: 8px; padding: 10px 16px; text-align: center;">
+          <p style="margin: 0; font-size: 12px; color: #0d1117; font-weight: 700;">EXECUTE</p>
+        </div>
+        <p style="margin: 0; font-size: 18px; color: #58a6ff;">→</p>
+        <div style="background: #238636; border-radius: 8px; padding: 10px 16px; text-align: center;">
+          <p style="margin: 0; font-size: 12px; color: #ffffff; font-weight: 700;">VERIFY</p>
+        </div>
+        <p style="margin: 0; font-size: 18px; color: #58a6ff;">→</p>
+        <div style="background: #a371f7; border-radius: 8px; padding: 10px 16px; text-align: center;">
+          <p style="margin: 0; font-size: 12px; color: #ffffff; font-weight: 700;">CORRECT</p>
+        </div>
+        <p style="margin: 0; font-size: 18px; color: #58a6ff;">→</p>
+        <div style="flex: 1; background: rgba(88, 166, 255, 0.2); border-radius: 8px; padding: 10px 16px; text-align: center; border: 1px dashed #58a6ff;">
+          <p style="margin: 0; font-size: 12px; color: #58a6ff;">Repeat at cadence of construction</p>
+        </div>
+      </div>
+      <div class="row" style="gap: 24px; margin-top: 14px;">
+        <p style="margin: 0; font-size: 12px; color: #e6edf3; flex: 1;"><strong style="color: #58a6ff;">Key insight:</strong> No action proceeds until a fast check of current world state passes</p>
+        <p style="margin: 0; font-size: 12px; color: #e6edf3; flex: 1;"><strong style="color: #a371f7;">Result:</strong> Turn potential failures into straightforward scheduling edits</p>
+      </div>
+    </div>
+    
+    <!-- Key differentiator -->
+    <div class="row" style="gap: 16px; margin-top: 4px;">
+      <div style="flex: 1; background: #161b22; border-radius: 8px; padding: 12px; text-align: center;">
+        <p style="margin: 0; font-size: 20px; color: #f78166; font-weight: 700;">Reactive</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: #8b949e;">Respond to failures</p>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <p style="margin: 0; font-size: 24px; color: #58a6ff;">vs</p>
+      </div>
+      <div style="flex: 1; background: rgba(88, 166, 255, 0.15); border: 1px solid #58a6ff; border-radius: 8px; padding: 12px; text-align: center;">
+        <p style="margin: 0; font-size: 20px; color: #58a6ff; font-weight: 700;">Proactive</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: #e6edf3;">Prevent failures before dispatch</p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Bottom bar -->
+  <div style="height: 3px; width: 100%; flex-shrink: 0; background: #58a6ff;"></div>
+  
+</body>
+</html>
